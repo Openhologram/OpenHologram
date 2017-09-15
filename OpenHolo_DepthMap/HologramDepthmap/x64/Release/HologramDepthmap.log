@@ -1,0 +1,14 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Moc'ing hologramdepthmap.h...
+  Uic'ing hologramdepthmap.ui...
+  Rcc'ing hologramdepthmap.qrc...
+  qrc_hologramdepthmap.cpp
+  moc_hologramdepthmap.cpp
+  hologramdepthmap.cpp
+  main.cpp
+  Generating Code...
+  Hologram.lib(HologramGenerator_CPU.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
+  Generating code
+  Finished generating code
+  HologramDepthmap.vcxproj -> D:\OpenHolo_Wolfsonlab\OpenHolo_DepthMap\HologramDepthmap\..\bin\HologramDepthmap.exe
+  HologramDepthmap.vcxproj -> D:\OpenHolo_Wolfsonlab\OpenHolo_DepthMap\HologramDepthmap\..\bin\HologramDepthmap.pdb (Full PDB)

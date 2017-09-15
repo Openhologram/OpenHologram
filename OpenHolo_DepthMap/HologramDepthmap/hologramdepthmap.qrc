@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="HologramDepthmap">
+    <file>Resources/hologram_generation.png</file>
+    <file>Resources/hologram_reconstruction.png</file>
+  </qresource>
+</RCC>
