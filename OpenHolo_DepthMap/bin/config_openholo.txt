@@ -12,7 +12,7 @@ result					// RESULT_FOLDER
 2250ppi_3840_UD_flat	// RESULT_PREFIX
 1						// FLAG_STATIC_IMAGE
 1						// START_OF_FRAME_NUMBERING
-60						// NUMBER_OF_FRAME
+60						// NUMBER_OF_FRAME 60
 0						// NUMBER_OF_DIGIT_OF_FRAME_NUMBERING
 ===============================================================================================
 # Corresponding methods for implementation

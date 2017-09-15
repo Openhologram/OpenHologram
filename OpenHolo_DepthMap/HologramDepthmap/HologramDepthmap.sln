@@ -3,18 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HologramDepthmap", "HologramDepthmap\HologramDepthmap.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "graphics", "..\graphics\build\graphics.vcxproj", "{8F0A46A6-E977-4019-96EF-6FA8EF45B277}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HologramDepthmap", "HologramDepthmap.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7050674E-BEB6-42AE-8196-8A467E5AA16A} = {7050674E-BEB6-42AE-8196-8A467E5AA16A}
 		{8F0A46A6-E977-4019-96EF-6FA8EF45B277} = {8F0A46A6-E977-4019-96EF-6FA8EF45B277}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "graphics", "..\graphics\build\graphics.vcxproj", "{8F0A46A6-E977-4019-96EF-6FA8EF45B277}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hologram", "..\Hologram\Hologram.vcxproj", "{7050674E-BEB6-42AE-8196-8A467E5AA16A}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8F0A46A6-E977-4019-96EF-6FA8EF45B277} = {8F0A46A6-E977-4019-96EF-6FA8EF45B277}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hologram", "..\Hologram\build\Hologram.vcxproj", "{7050674E-BEB6-42AE-8196-8A467E5AA16A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,16 +23,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Itanium.ActiveCfg = Debug|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.ActiveCfg = Debug|x64
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.Build.0 = Debug|x64
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.ActiveCfg = Debug|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.Build.0 = Debug|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Itanium.ActiveCfg = Release|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|x64
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.Build.0 = Release|x64
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.ActiveCfg = Release|Win32
-		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.Build.0 = Release|Win32
 		{8F0A46A6-E977-4019-96EF-6FA8EF45B277}.Debug|Itanium.ActiveCfg = Debug|Itanium
 		{8F0A46A6-E977-4019-96EF-6FA8EF45B277}.Debug|Itanium.Build.0 = Debug|Itanium
 		{8F0A46A6-E977-4019-96EF-6FA8EF45B277}.Debug|x64.ActiveCfg = Debug|x64
@@ -48,6 +35,16 @@ Global
 		{8F0A46A6-E977-4019-96EF-6FA8EF45B277}.Release|x64.Build.0 = Release|x64
 		{8F0A46A6-E977-4019-96EF-6FA8EF45B277}.Release|x86.ActiveCfg = Release|Win32
 		{8F0A46A6-E977-4019-96EF-6FA8EF45B277}.Release|x86.Build.0 = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Itanium.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.ActiveCfg = Debug|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.Build.0 = Debug|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Itanium.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.Build.0 = Release|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.Build.0 = Release|Win32
 		{7050674E-BEB6-42AE-8196-8A467E5AA16A}.Debug|Itanium.ActiveCfg = Debug|Win32
 		{7050674E-BEB6-42AE-8196-8A467E5AA16A}.Debug|x64.ActiveCfg = Debug|x64
 		{7050674E-BEB6-42AE-8196-8A467E5AA16A}.Debug|x64.Build.0 = Debug|x64
