@@ -1,0 +1,77 @@
+|2015-07-01|13:02:02 Bitmap FIle Generation start
+|2015-07-01|13:03:01 Bitmap FIle normalization start
+|2015-07-01|13:03:01 Bitmap FIle Created
+|2015-07-01|13:07:41 Bitmap FIle Generation start
+|2015-07-01|13:08:40 Bitmap FIle normalization start
+|2015-07-01|13:08:40 Bitmap FIle Created
+|2015-07-03|14:04:38 Bitmap FIle Generation start
+|2015-07-03|14:04:47 Bitmap FIle normalization start
+|2015-07-03|14:04:47 Bitmap FIle Created
+|2015-07-03|14:04:58 Bitmap FIle Generation start
+|2015-07-03|14:05:07 Bitmap FIle normalization start
+|2015-07-03|14:05:07 Bitmap FIle Created
+|2015-07-07|17:39:03 Bitmap FIle Generation start
+|2015-07-07|17:39:12 Bitmap FIle normalization start
+|2015-07-07|17:39:12 Bitmap FIle Created
+|2015-07-07|18:10:45 Bitmap FIle Generation start
+|2015-07-07|18:10:57 Bitmap FIle normalization start
+|2015-07-07|18:10:57 Bitmap FIle Created
+|2015-07-10|10:22:30 Cannot read point cloud file. Press "CTRL+c" to stop.
+|2015-07-10|10:23:08 Cannot read config file. Press "CTRL+c" to stop.
+|2015-07-10|10:23:31 Bitmap FIle Generation start
+|2015-07-10|10:23:31 Bitmap FIle normalization start
+|2015-07-10|10:23:31 Bitmap FIle Created
+|2015-07-10|14:48:17 Bitmap FIle Generation start
+|2015-07-10|14:48:17 Bitmap FIle normalization start
+|2015-07-10|14:48:17 Bitmap FIle Created
+|2015-07-10|14:49:02 Bitmap FIle Generation start
+|2015-07-10|14:49:02 Bitmap FIle normalization start
+|2015-07-10|14:49:02 Bitmap FIle Created
+|2015-07-10|14:50:51 Bitmap FIle Generation start
+|2015-07-10|14:50:51 Bitmap FIle normalization start
+|2015-07-10|14:50:51 Bitmap FIle Created
+|2015-07-10|14:59:22 Bitmap FIle Generation start
+|2015-07-10|14:59:22 Bitmap FIle normalization start
+|2015-07-10|14:59:22 Bitmap FIle Created
+|2015-07-10|15:03:39 Bitmap FIle Generation start
+|2015-07-10|15:03:39 Bitmap FIle normalization start
+|2015-07-10|15:03:39 Bitmap FIle Created
+|2015-07-13|14:51:27 Bitmap FIle Generation start
+|2015-07-13|14:51:28 Bitmap FIle normalization start
+|2015-07-13|14:51:28 Bitmap FIle Created
+|2015-10-19|20:30:20 Bitmap FIle Generation start
+|2015-10-19|20:30:21 Bitmap FIle normalization start
+|2015-10-19|20:30:21 Bitmap FIle Created
+|2015-10-19|20:31:12 Bitmap FIle Generation start
+|2015-10-19|20:31:21 Bitmap FIle normalization start
+|2015-10-19|20:31:21 Bitmap FIle Created
+|2016-01-07|17:44:00 Usage: PointCloudFIle ConfigFile DestinationFile. Press "CTRL+c" to stop.
+|2016-01-07|17:44:20 Cannot read config file. Press "CTRL+c" to stop.
+|2016-01-07|17:44:30 Cannot read config file. Press "CTRL+c" to stop.
+|2016-01-07|17:44:58 Bitmap FIle Generation start
+|2016-01-07|17:45:07 Bitmap FIle normalization start
+|2016-01-07|17:45:07 Bitmap FIle Created
+|2016-09-27|16:00:08 Usage: PointCloudFIle ConfigFile DestinationFile. Press "CTRL+c" to stop.
+|2016-09-27|16:00:42 Bitmap FIle Generation start
+|2016-09-27|16:02:09 Bitmap FIle normalization start
+|2016-09-27|16:02:09 Bitmap FIle Created
+|2016-09-27|16:58:46 Bitmap FIle Generation start
+|2016-09-27|17:00:19 Bitmap FIle normalization start
+|2016-09-27|17:00:19 Bitmap FIle Created
+|2017-09-27|17:53:16 Cannot read total number of points. Press "CTRL+c" to stop.
+|2017-09-27|17:54:14 Bitmap FIle Generation start
+|2017-09-27|17:55:58 Bitmap FIle normalization start
+|2017-09-27|17:55:58 Bitmap FIle Created
+|2017-09-27|18:00:11 Bitmap FIle Generation start
+|2017-09-27|18:01:57 Bitmap FIle normalization start
+|2017-09-27|18:01:57 Bitmap FIle Created
+|2017-10-10|20:30:00 Cannot read config file. Press "CTRL+c" to stop.
+|2017-10-10|20:32:20 Bitmap FIle Generation start
+|2017-10-10|20:32:20 Bitmap FIle normalization start
+|2017-10-10|20:32:20 Bitmap FIle Created
+|2017-10-10|20:33:01 Bitmap FIle Generation start
+|2017-10-10|20:34:43 Bitmap FIle normalization start
+|2017-10-10|20:34:43 Bitmap FIle Created
+|2017-10-11|19:39:40 Bitmap FIle Generation start
+|2017-10-11|19:41:17 Bitmap FIle normalization start
+|2017-10-11|19:41:17 Bitmap FIle Created
