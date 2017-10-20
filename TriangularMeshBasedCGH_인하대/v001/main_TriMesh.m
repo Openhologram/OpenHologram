@@ -55,8 +55,8 @@ objectSize = holoParam.sizeX/3;
 % HOLOGRAM FILE NAME (SAVE) : hologram_name
 % HOLOGRAM RECONSTRUCTION FILE NAME (SAVE) : reconst_name
 
-hologramFileName='hologram.jpg';
-recFileName='recon.jpg';
+hologramFileName='./teapot/hologram.jpg';
+recFileName='./teapot/recon.jpg';
 
 %% %%%%%%%%%%%%%%%%%% Setting done %%%%%%%%%%%%%%%%%% %%
 
