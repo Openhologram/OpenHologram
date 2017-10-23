@@ -9,6 +9,7 @@ HologramDepthmap::HologramDepthmap(QWidget *parent)
 	QObject::connect(ui.pbGen, SIGNAL(clicked()), this, SLOT(GenHologram()));
 	QObject::connect(ui.pbRecon, SIGNAL(clicked()), this, SLOT(ReconImage()));
 	
+	ui.rbCPU->setChecked(true);
 	hologram_ = 0;
 
 }
@@ -24,6 +25,8 @@ void HologramDepthmap::GenHologram()
 
 	if (!hologram_)
 		hologram_ = new HologramGenerator();
+
+	hologram_->setMode(ui.rbCPU->isChecked());
 
 	if (!hologram_->readConfig())
 	{
@@ -44,15 +47,14 @@ void HologramDepthmap::GenHologram()
 void HologramDepthmap::ReconImage()
 {
 	if (!hologram_)
-	{
 		hologram_ = new HologramGenerator();
-		if (!hologram_->readConfig())
-		{
-			QMessageBox::warning(this, "Warning", "Error: Wrong Format\n", QMessageBox::Ok, QMessageBox::Ok);
-			return;
-		}
-	}
+	hologram_->setMode(ui.rbCPU->isChecked());
 
+	if (!hologram_->readConfig())
+	{
+		QMessageBox::warning(this, "Warning", "Error: Wrong Format\n", QMessageBox::Ok, QMessageBox::Ok);
+		return;
+	}
 	LOG("Reconstruct Image\n");
 
 	hologram_->ReconstructImage();

@@ -4,12 +4,13 @@
 //| ivec : n-dimensional ivector
 //|
 
-
 #include <stdio.h>
-
 
 namespace graphics {
 
+/**
+* @brief structure for 2-dimensional integer vector and its arithmetic.
+*/
 struct ivec2 {
     int v[2];
     static const int n;
@@ -324,19 +325,9 @@ inline ivec2 operator - (const ivec2& a)
     return c;
 }
 
-
-
-//| I/O
-void print(const ivec2& a)
-;
-
-void store(FILE* fp, const ivec2& v)
-;
-
-int scan(FILE* fp, const ivec2& v)
-;
-
-
+/**
+* @brief structure for 3-dimensional integer vector and its arithmetic.
+*/
 struct ivec3 {
     int v[3];
     static const int n;
@@ -370,12 +361,7 @@ struct ivec3 {
     inline int& operator() (int i) { return v[i % 3]; }
     inline const int&  operator() (int i) const { return v[i % 3]; }
 };
-
-
-
-
 //| binary op : componentwise
-
 
 inline ivec3 operator + (const ivec3& a, const ivec3& b)
 {
@@ -651,19 +637,9 @@ inline ivec3 operator - (const ivec3& a)
     return c;
 }
 
-
-
-//| I/O
-void print(const ivec3& a)
-;
-
-void store(FILE* fp, const ivec3& v)
-;
-
-int scan(FILE* fp, const ivec3& v)
-;
-
-
+/**
+* @brief structure for 4-dimensional integer vector and its arithmetic.
+*/
 struct ivec4 {
     int v[4];
     static const int n;
@@ -979,18 +955,6 @@ inline ivec4 operator - (const ivec4& a)
     for(int i = 0; i < 4;++i) { c[i] = -a[i]; }
     return c;
 }
-
-
-
-//| I/O
-void print(const ivec4& a)
-;
-
-void store(FILE* fp, const ivec4& v)
-;
-
-int scan(FILE* fp, const ivec4& v)
-;
 
 }; //namespace graphics
 #endif

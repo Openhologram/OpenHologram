@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['random_5fphase',['RANDOM_PHASE',['../class_hologram_generator.html#a162a42b26ca4838e29975bef80ca60d2',1,'HologramGenerator']]],
+  ['readconfig',['readConfig',['../group__init__module.html#ga8082a4097ccc7ebc5f22e9b846af58f6',1,'HologramGenerator']]],
+  ['readimagedepth',['ReadImageDepth',['../group__load__module.html#ga28ae59bdc71e3b565322f569154be3ac',1,'HologramGenerator']]],
+  ['real',['real',['../real_8h.html#a11d147c64891830c9e79b3315b1b2e21',1,'real.h']]],
+  ['real_2eh',['real.h',['../real_8h.html',1,'']]],
+  ['real_5ft',['real_t',['../real_8h.html#a1924a4f6907cc3833213aba1f07fcbe9',1,'real.h']]],
+  ['real_5ft_5fis_5ffloat',['REAL_T_IS_FLOAT',['../real_8h.html#a851e2da9adb3b57563eeb7b15054ca4a',1,'real.h']]],
+  ['reconstruction',['Reconstruction',['../group__recon__module.html',1,'']]],
+  ['reconimage',['ReconImage',['../class_hologram_depthmap.html#a5f4e31da378fa5f645deb2e75f98b2cf',1,'HologramDepthmap']]],
+  ['reconstructimage',['ReconstructImage',['../group__recon__module.html#ga95b6942dc3bee6faeb14b22c1d2cdcf5',1,'HologramGenerator']]],
+  ['reconstruction',['Reconstruction',['../group__recon__module.html#gae5d8774fdf2cc1b115fea03472ac3ad4',1,'HologramGenerator']]],
+  ['render_5fdepth',['render_depth',['../struct_hologram_params.html#ae11f1e2d4f9bdd2d2a85b9b1af2a1ae6',1,'HologramParams']]],
+  ['reset_5fu_5fepsilon',['reset_u_epsilon',['../namespacegraphics.html#aff2cef2ef2a0c12574340f0fdf7d8d04',1,'graphics']]],
+  ['reset_5fzero_5fepsilon',['reset_zero_epsilon',['../namespacegraphics.html#afe3f09eff4995b610ebee2a3a31dc923',1,'graphics']]],
+  ['result_5ffolder',['RESULT_FOLDER',['../class_hologram_generator.html#ab25faf0c5647df5957603e184a7202f0',1,'HologramGenerator']]],
+  ['result_5fprefix',['RESULT_PREFIX',['../class_hologram_generator.html#a5784c71bc42a80e4e2d5e8c5cc819dce',1,'HologramGenerator']]]
+];

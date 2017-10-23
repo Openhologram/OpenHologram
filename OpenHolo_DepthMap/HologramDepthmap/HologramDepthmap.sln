@@ -12,6 +12,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HologramDepthmap", "Hologra
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hologram", "..\Hologram\build\Hologram.vcxproj", "{7050674E-BEB6-42AE-8196-8A467E5AA16A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8F0A46A6-E977-4019-96EF-6FA8EF45B277} = {8F0A46A6-E977-4019-96EF-6FA8EF45B277}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

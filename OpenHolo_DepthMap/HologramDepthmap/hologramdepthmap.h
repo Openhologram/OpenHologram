@@ -3,9 +3,13 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_hologramdepthmap.h"
+#include "Hologram/HologramGenerator.h"
 #include "graphics/sys.h"
-#include "Hologram/HologramGenerator_CPU.h"
 
+/**
+* @brief Test class for executing the sample program, which shows how to use a hologram library.
+* @details The sample program has a main window form and the user can choose the execution type - CPU and GPU.
+*/
 class HologramDepthmap : public QMainWindow
 {
 	Q_OBJECT

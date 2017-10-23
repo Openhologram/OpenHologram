@@ -1,7 +1,4 @@
 #include "graphics/epsilon.h"
-
-
-
 #include <math.h>
 #include "graphics/sys.h"
 

@@ -8,17 +8,17 @@
 //   Dae-Hyun Kim
 
 
-
 #include "graphics/real.h"
-#include <stdio.h>
 #include "graphics/ivec.h"
-#include <math.h>
 #include "graphics/epsilon.h"
-
+#include <math.h>
+#include <stdio.h>
 
 namespace graphics {
-
-
+	
+/**
+* @brief structure for 2-dimensional real type vector and its arithmetic.
+*/
 struct vec2 {
     real v[2];
     static const int n;
@@ -73,22 +73,7 @@ struct vec2 {
         real = angle_tolerance // optional angle tolerance (radians)
         ) const;
 
-    //
-    // Computes a, b such that this vector = a*X + b*Y
-    // Returns false if unable to solve for a,b.  This happens
-    // when X,Y is not really a basis.
-    //
-    // If X,Y is known to be an orthonormal frame,
-    // then a = V*X, b = V*Y will compute
-    // the same result more quickly.
-    bool decompose( 
-         const vec2&, // X
-         const vec2&, // Y
-         real&, // a
-         real&  // b
-         ) const;
-
-    //
+  
     // returns true:  this and other vectors are perpendicular
     //         false: this and other vectors are not perpendicular
     //                or at least one of the vectors is zero
@@ -446,9 +431,6 @@ inline vec2 absolute(const vec2& val)
     return vec2(fabs(val[0]), fabs(val[1]));
 }
 
-//| I/O
-void print(const vec2& a);
-
 void store(FILE* fp, const vec2& v);
 
 int scan(FILE* fp, const vec2& v);
@@ -456,7 +438,9 @@ int scan(FILE* fp, const vec2& v);
 int apx_equal(const vec2& a, const vec2& b);
 int apx_equal(const vec2& a, const vec2& b, real eps);
 
-
+/**
+* @brief structure for 3-dimensional real type vector and its arithmetic.
+*/
 struct vec3 {
     real v[3];
     static const int n;
@@ -501,23 +485,7 @@ struct vec3 {
     bool unit(); 
     real length() const; 
 
-    //
-    // Computes a, b, c such that this vector = a*X + b*Y + c*Z
-    // Returns false if unable to solve for a,b,c.  This happens
-    // when X,Y,Z is not really a basis.
-    //
-    // If X,Y,Z is known to be an orthonormal frame,
-    // then a = V*X, b = V*Y, c = V*Z will compute
-    // the same result more quickly.
-    bool decompose( 
-         const vec3&, // X
-         const vec3&, // Y
-         const vec3&, // Z
-         real&, // a
-         real&, // b
-         real&  // c
-         ) const;
-
+ 
     //
     // returns  1: this and other vectors are parallel
     //         -1: this and other vectors are anti-parallel
@@ -551,10 +519,6 @@ struct vec3 {
          const vec3&, const vec3&, const vec3& 
          );
 };
-
-
-
-
 
 //| binary op : componentwise
 
@@ -648,8 +612,6 @@ inline vec3 operator / (const vec3& a, real b)
     for(int i = 0; i < 3;++i) { c[i] = a[i] / b; }
     return c;
 }
-
-
 
 //| cumulative op : componentwise
 
@@ -890,17 +852,15 @@ inline vec3 proj(const vec3& axis, const vec3& a)
     return inner(a, u) * u;
 }
 
- 
-
-//| I/O
-void print(const vec3& a);
-
 void store(FILE* fp, const vec3& v);
 int scan(FILE* fp, const vec3& v);
 
 int apx_equal(const vec3& a, const vec3& b);
 int apx_equal(const vec3& a, const vec3& b, real eps);
 
+/**
+* @brief structure for 4-dimensional real type vector and its arithmetic.
+*/
 struct vec4 {
     real v[4];
     static const int n;
@@ -1282,11 +1242,6 @@ inline vec4 proj(const vec4& axis, const vec4& a)
     vec4 u = unit(axis);
     return inner(a, u) * u;
 }
-
- 
-
-//| I/O
-void print(const vec4& a);
 
 void store(FILE* fp, const vec4& v);
 

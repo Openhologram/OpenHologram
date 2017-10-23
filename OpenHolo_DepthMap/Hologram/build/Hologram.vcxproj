@@ -20,10 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\fftw3.h" />
-    <ClInclude Include="..\HologramGenerator_CPU.h" />
+    <ClInclude Include="..\HologramGenerator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\HologramGenerator.cpp" />
     <ClCompile Include="..\src\HologramGenerator_CPU.cpp" />
+    <ClCompile Include="..\src\HologramGenerator_GPU.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="..\src\HologramKernel.cu" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7050674E-BEB6-42AE-8196-8A467E5AA16A}</ProjectGuid>
@@ -145,7 +150,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_CONSOLE;QT_DLL;QT_NO_DEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..;$(SolutionDir)..\;$(SolutionDir)..\external_include\;%(AdditionalIncludeDirectories);$(CudaToolkitIncludeDir);$(QTDIR)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;$(SolutionDir)..\;%(AdditionalIncludeDirectories);$(CudaToolkitIncludeDir);$(QTDIR)\include</AdditionalIncludeDirectories>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <EnableParallelCodeGeneration>
@@ -166,8 +171,13 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
       <HostDebugInfo>true</HostDebugInfo>
-      <AdditionalDeps>PolyHologramNew.cu;%(AdditionalDeps)</AdditionalDeps>
+      <AdditionalDeps>
+      </AdditionalDeps>
     </CudaCompile>
+    <Lib>
+      <AdditionalDependencies>libfftw3-3.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
