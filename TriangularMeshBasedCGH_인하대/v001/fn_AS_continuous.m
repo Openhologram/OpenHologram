@@ -1,9 +1,9 @@
-function G = fn_hologram_continuous(X, ref, fx, fy, fz, w, illu, na, nv, i)
+function G = fn_AS_continuous(X, ref, fx, fy, fz, w, illu, na, nv, i)
 
 n=na(i,:);
 
 if n(3)>0
-if n==[0;0;0]      % rotationR error
+if n==[0, 0, 0]      % rotationR error
     G=0;
 else
 
@@ -17,7 +17,7 @@ end
 
 ph=atan(n(2)/sqrt(n(1)^2+n(3)^2));
 
-% x축 ph 회전 -> y 축 -th 회전
+% x-axis ph rotation -> y-axis -th rotation
 R=[cos(th) 0 -sin(th);
     -sin(ph)*sin(th) cos(ph) -cos(th)*sin(ph);
     cos(ph)*sin(th) sin(ph) cos(ph)*cos(th)];     % global -> local rotation
@@ -34,7 +34,7 @@ else
 
 Xld=Xl(1:2,:)';
 
-% ex) Xl(2,1), ref(2,1) ; 2번째 점 x좌표
+% ex) Xl(2,1), ref(2,1) ; x coordinate of 2nd vertex
 
 b=Xld(3,1)*Xld(2,2)-Xld(3,2)*Xld(2,1);
 
@@ -100,7 +100,7 @@ D3(flxA==-flyA) = (-1i)./(4*pi^2.*flxA(flxA==-flyA).^2).*exp(-1i*2*pi.*flxA(flxA
     +(-1i*2*pi.*flxA(flxA==-flyA)+1)./(4*pi^2.*flxA(flxA==-flyA).^2);
 
 D1(flxA~=0 & flyA==0) = (1i*4*pi^2.*flxA(flxA~=0 & flyA==0).^2+4*pi.*flxA(flxA~=0 & flyA==0)-2*1i)./(8*pi^3.*flxA(flxA~=0 & flyA==0).^3).*exp(-1i*2*pi.*flxA(flxA~=0 & flyA==0)) ...
-    +1i/(4*pi^3.*flxA(flxA~=0 & flyA==0).^3);
+    +1i./(4*pi^3.*flxA(flxA~=0 & flyA==0).^3);
 D2(flxA~=0 & flyA==0) = 1/2*D1(flxA~=0 & flyA==0);
 D3(flxA~=0 & flyA==0) = ((1i*2*pi.*flxA(flxA~=0 & flyA==0)+1).*exp(-1i*2*pi.*flxA(flxA~=0 & flyA==0))-1)./(4*pi^2.*flxA(flxA~=0 & flyA==0).^2);
     

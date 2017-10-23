@@ -1,10 +1,10 @@
-function [G, s] = fn_hologram_shading(X, ref, fx, fy, fz, w, illu)
+function G = fn_AS_shading(X, ref, fx, fy, fz, w, illu)
 
 no=(cross(X(:,2)-X(:,3),X(:,1)-X(:,3)));
 
 if no(3)>0
 if no==[0;0;0]      % rotationR error
-    G=0; s=0;
+    G=0;
 else
 
 %% global -> local rotation
@@ -19,7 +19,7 @@ end
 
 ph=atan(n(2)/sqrt(n(1)^2+n(3)^2));
 
-% x축 ph 회전 -> y 축 -th 회전
+% x-axis ph rotation -> y-axis -th rotation
 R=[cos(th) 0 -sin(th);
     -sin(ph)*sin(th) cos(ph) -cos(th)*sin(ph);
     cos(ph)*sin(th) sin(ph) cos(ph)*cos(th)];     % global -> local rotation
@@ -31,12 +31,12 @@ Xl=Xl+repmat(c,1,3);   % global -> local
 %% A
 
 if Xl(1,3)*Xl(2,2)==Xl(2,3)*Xl(1,2)     % rotationA error
-    G=0; s=0;    
+    G=0;
 else
 
 Xld=Xl(1:2,:)';
 
-% ex) Xl(2,1), ref(2,1) ; 2번째 점 x좌표
+% ex) Xl(2,1), ref(2,1) ; x coordinate of 2nd vertex
 
 b=Xld(3,1)*Xld(2,2)-Xld(3,2)*Xld(2,1);
 
@@ -105,7 +105,8 @@ end
 
 end
 end
+G = G*(2*s+0.1);
 else
-        G=0; s=0;
-end
+        G=0;
+        
 end
