@@ -10,6 +10,28 @@
 #include <direct.h>
 #include <memory.h>
 #include <time.h>
+#define HAVE_STRUCT_TIMESPEC
+#include <pthread.h>
+
+
+
+typedef struct  {
+	float p_x;
+	float p_y;
+	float L_y;
+	float L_x;
+	float* u_h;
+	int itr_y;
+	int N_x;
+	float x_pc;
+	float y_pc;
+	float z_pc;
+	float k;
+	float theta_x;
+	float theta_y;
+	float amp_pc;
+}RSparam;
+void* coordinatePixel(void*);
 
 int parseTokens(FILE *filePtr, char **tokens, char **values)
 {
@@ -145,7 +167,7 @@ int main(int argc, char* argv[])
 	LOG("Bitmap FIle Generation start");
 	int n;
 		#pragma omp parallel for private(n)
-
+	
 	// please check this
 	for(n = 0; n < s_i_pointNum; n++){
 		
@@ -158,22 +180,27 @@ int main(int argc, char* argv[])
 
 			for (int itr_y = 0; itr_y < N_y; itr_y++){
 				// Y coordinate of the current pixel
-				float temp_y_cord = L_y/2 - ((float)itr_y + 0.5)*p_y;	// Note that y index is reversed order.
-				for (int itr_x = 0; itr_x < N_x; itr_x++){
-					// X coordinate of the current pixel
-						
-						float temp_x_cord = ((float)itr_x + 0.5)*p_x - L_x/2;    // p_x : pixel pitch,  temp_x_cord : SLM coord , x_pc: point cloud x coord 
-						float *pixel_pos = u_h + itr_x + itr_y*N_x;
-//						char *flag_pos = flag_addressed + itr_x + itr_y*N_x;
-						float r = sqrt((temp_x_cord - x_pc)*(temp_x_cord - x_pc) + (temp_y_cord - y_pc)*(temp_y_cord - y_pc) + z_pc*z_pc); // Distance
-//						float phi = k*(z_pc/abs(z_pc)*r - temp_x_cord*sin(theta_x) - temp_y_cord*sin(theta_y)); // Phase for printer
-						float phi = k*r - k*temp_x_cord*sin(theta_x) - k*temp_y_cord*sin(theta_y); // Phase for printer
-						//float calcVal = amp_pc*z_pc/(r*r)*cos(phi + phase_pc);
-						float calcVal = amp_pc*cos(phi);
-//						float calcVal = amp_pc*cos(phi + phase_pc);
-						*(pixel_pos) = *(pixel_pos) + calcVal;
-//						*(flag_pos) = 1;
-				}
+				RSparam param;
+
+				param.p_x = p_x;
+				param.p_y = p_y;
+				param.L_y = L_y;
+				param.L_x = L_x;
+				param.u_h = u_h;
+				param.itr_y = itr_y;
+				param.N_x = N_x;
+				param.x_pc = x_pc; 
+				param.y_pc = y_pc; 
+				param.z_pc = z_pc;
+				param.k = k;
+				param.theta_x = theta_x;
+				param.theta_y = theta_y;
+				param.amp_pc = amp_pc;
+
+				int joinStatus;
+				pthread_t mThread;
+				pthread_create(&mThread, NULL, coordinatePixel, (void*)&param);
+				pthread_join(mThread, (void**)&joinStatus);
 			}
 	}
 	LOG("Bitmap FIle normalization start");
@@ -219,10 +246,27 @@ int main(int argc, char* argv[])
 	free(qnt_u);
 
 //MPI_END:
-	
 	return 0;
 }
+// X coordinate of the current pixel
+void* coordinatePixel(void* arg)
+{
+	RSparam *param = (RSparam*)arg;
+	
+	float temp_y_cord = param->L_y / 2 - ((float)param->itr_y + 0.5)*param->p_y;	// Note that y index is reversed order.
+	for (int itr_x = 0; itr_x < param->N_x; itr_x++) {
+		// X coordinate of the current pixel
+		float temp_x_cord = (itr_x + 0.5)*param->p_x - param->L_x / 2;    // p_x : pixel pitch,  temp_x_cord : SLM coord , x_pc: point cloud x coord
 
+		float *pixel_pos = param->u_h + itr_x + param->itr_y*param->N_x;
+
+		float r = sqrt((temp_x_cord - param->x_pc)*(temp_x_cord - param->x_pc) + (temp_y_cord - param->y_pc)*(temp_y_cord - param->y_pc) + param->z_pc*param->z_pc); // Distance
+		float phi = param->k*r - param->k*temp_x_cord*sin(param->theta_x) - param->k*temp_y_cord*sin(param->theta_y); // Phase for printer
+		float calcVal = param->amp_pc*cos(phi);
+		*(pixel_pos) = *(pixel_pos)+calcVal;
+	}
+	return 0;
+}
 
 
 // UTility
