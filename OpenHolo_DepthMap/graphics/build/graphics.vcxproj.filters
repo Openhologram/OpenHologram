@@ -30,19 +30,10 @@
     <ClInclude Include="..\real.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\sys.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\vec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\solve.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\_limits.h">
+    <ClInclude Include="..\sys.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,25 +41,10 @@
     <ClCompile Include="..\src\epsilon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\ivec.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\real.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\sys.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\vec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\log.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\solve.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\_limits.cpp">
+    <ClCompile Include="..\src\sys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

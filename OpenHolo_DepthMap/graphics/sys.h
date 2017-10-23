@@ -5,7 +5,6 @@
 
 #include <windows.h>
 #include <conio.h>
-
 #include <stdio.h>
 
 typedef  wchar_t WChar;
@@ -40,13 +39,12 @@ void file_log(const char *fmt, ...);
 #endif
 
 
-#ifdef _WIN32
-#include  "GL/glew.h"
-#include  <GL/gl.h>
-#include  <GL/glu.h>
-#include  <GL/glext.h>
-
-#endif
+//#ifdef _WIN32
+//#include  "GL/glew.h"
+//#include  <GL/gl.h>
+//#include  <GL/glu.h>
+//#include  <GL/glext.h>
+//#endif
 
 
 #ifdef _MAC_OS

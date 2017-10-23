@@ -2,7 +2,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-
 static FILE *fp;
  
 void file_log(const char *fmt, ...)

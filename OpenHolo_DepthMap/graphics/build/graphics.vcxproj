@@ -180,7 +180,7 @@
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_WIN64;_WINDOWS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\external_include\freetype;$(SolutionDir).;$(SolutionDir)..\external_include;..\..;$(QTDIR)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir).;..\..;$(QTDIR)\include</AdditionalIncludeDirectories>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <CallingConvention>FastCall</CallingConvention>
@@ -209,22 +209,14 @@
     <ClInclude Include="..\complex.h" />
     <ClInclude Include="..\epsilon.h" />
     <ClInclude Include="..\ivec.h" />
-    <ClInclude Include="..\log.h" />
     <ClInclude Include="..\real.h" />
-    <ClInclude Include="..\solve.h" />
     <ClInclude Include="..\sys.h" />
     <ClInclude Include="..\vec.h" />
-    <ClInclude Include="..\_limits.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\epsilon.cpp" />
-    <ClCompile Include="..\src\ivec.cpp" />
-    <ClCompile Include="..\src\log.cpp" />
-    <ClCompile Include="..\src\real.cpp" />
-    <ClCompile Include="..\src\solve.cpp" />
     <ClCompile Include="..\src\sys.cpp" />
     <ClCompile Include="..\src\vec.cpp" />
-    <ClCompile Include="..\src\_limits.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
