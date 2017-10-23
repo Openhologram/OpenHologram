@@ -16,8 +16,9 @@
 const double PI = 3.141592653589793238462643383279502884197169399375105820974944592308;
 const double TWO_PI = 2.0*PI;
 
-class ComplexEuler;
-
+/**
+* @brief class for the complex number and its arithmetic.
+*/
 class Complex
 {
 public:
@@ -28,8 +29,7 @@ public:
         a = p.a;
         b = p.b;
     }
-    Complex( const ComplexEuler& p );
-
+   
     double mag2() const  { return a*a+b*b; }
     double mag()  const  { return sqrt(a*a+b*b); }
 
@@ -145,106 +145,5 @@ public:
     double a, b;
 };
 
-class ComplexEuler
-{
-public:
-    ComplexEuler() : r_(0.0), theta_(0.0) {}
-    ComplexEuler( double r, double theta ) : r_(r), theta_(theta) {}
-    ComplexEuler( const Complex& p ) : r_(p.mag2()), theta_(p.arg()) {}
-    ComplexEuler( const ComplexEuler& p ) : r_(p.r_), theta_(p.theta_) {}
 
-    double real() const  { return r_*cos(theta_); }
-    double imaginary() const { return r_*sin(theta_); }
-
-    double mag2() const  { return r_*r_; }
-    double mag()  const  { return r_; }
-    double arg()  const  { return theta_; }
-
-    ComplexEuler conj() const { return ComplexEuler(r_, -theta_); }
-
-
-    // arithmetic
-    const ComplexEuler& operator= (const ComplexEuler& p )
-    {
-        r_      = p.r_;
-        theta_  = p.theta_;
-
-        return *this;
-    }
-
-    const ComplexEuler& operator*= (const double k)
-    {
-        r_ *= k;
-        if( r_ < 0.0 )
-            theta_ += PI;
-
-        return *this;
-    }
-
-    const ComplexEuler& operator*= (const ComplexEuler& p )
-    {
-        r_      *= p.r_;
-        theta_  += p.theta_;
-
-        return *this; 
-    }
-
-    const ComplexEuler& operator/= (const double k)
-    {
-        r_ /= k;
-        if( r_ < 0.0 )
-            theta_ += PI;
-
-        return *this;
-    }
-
-    const ComplexEuler& operator/= (const ComplexEuler& p)
-    {
-        r_      /= p.r_;
-        theta_  -= p.theta_;
-
-        return *this;
-    }
-
-    friend const ComplexEuler operator* ( const double k, 
-                                          const ComplexEuler& p )
-    {
-        return ComplexEuler(p) *= k;
-    }
-
-    friend const ComplexEuler operator* ( const ComplexEuler& p, 
-                                          const double k )
-    {
-        return ComplexEuler(p) *= k;
-    }
-
-    friend const ComplexEuler operator* ( const ComplexEuler& p, 
-                                          const ComplexEuler& q )
-    {
-        return ComplexEuler( p.r_*q.r_, p.theta_+q.theta_ );
-    }
-
-    friend const ComplexEuler operator/ ( const ComplexEuler& p, 
-                                          const ComplexEuler& q )
-    {
-        return ComplexEuler( p.r_/q.r_, p.theta_-q.theta_ );
-    }
-
-    // stream
-    friend std::ostream& operator << ( std::ostream& os, 
-                                       const ComplexEuler& p )
-    {
-        os << p.r_ << "exp(i" << p.theta_ << ")";
-        return os;
-    }
-
-public:
-    double r_, theta_;
-};
-
-inline Complex::Complex(const ComplexEuler &p)
-{
-    a = p.real();
-    b = p.imaginary();
-}
 #endif

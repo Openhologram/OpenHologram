@@ -9,10 +9,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\fftw3.h">
+    <ClInclude Include="..\HologramGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\HologramGenerator_CPU.h">
+    <ClInclude Include="..\fftw3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -20,5 +20,14 @@
     <ClCompile Include="..\src\HologramGenerator_CPU.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\HologramGenerator_GPU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\HologramGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="..\src\HologramKernel.cu" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,4 @@
 #include "graphics/vec.h"
-#include "graphics/solve.h"
-#include "graphics/sys.h"
 
 namespace graphics {
 
@@ -21,26 +19,6 @@ real vec2::length() const
     return norm(*this); 
 }
 
-bool vec2::decompose( // Computes a, b such that this vector = a*X + b*Y
-       //
-       // If X,Y is known to be an orthonormal frame,
-       // then a = V*X, b = V*Y will compute
-       // the same result more quickly.
-       const vec2& X,
-       const vec2& Y,
-       real& a,
-       real& b
-       ) const
-{
-  int rank;
-  real pivot_ratio = 0.0;
-  real XoY = inner(X, Y);
-  rank = Solve2x2( inner(X,X), XoY, inner(Y,Y), XoY,
-                    inner((*this),X), inner((*this),Y), 
-                    &a, &b, &pivot_ratio );
-  return (rank == 2) ? true : false;
-}
- 
 int vec2::is_parallel( 
       // returns  1: this and other vectors are and parallel
       //         -1: this and other vectors are anti-parallel
@@ -100,15 +78,6 @@ bool vec2::perpendicular(
   return perpendicular(q-p);
 }
 
-//| I/O
-void print(const vec2& a)
-{
-    LOG("(%g", a[0]);
-    for(int i = 1; i < 2;++i){
-	LOG(" %g", a[i]);
-    }
-    LOG(") ");
-}
 
 void store(FILE* fp, const vec2& v)
 {
@@ -168,31 +137,6 @@ bool vec3::unit()
 real vec3::length() const 
 { 
     return norm(*this); 
-}
-
-bool vec3::decompose( // Computes a, b, c such that this vector = a*X + b*Y + c*Z
-       //
-       // If X,Y,Z is known to be an orthonormal frame,
-       // then a = V*X, b = V*Y, c = V*Z will compute
-       // the same result more quickly.
-       const vec3& X,
-       const vec3& Y,
-       const vec3& Z,
-       real& a,
-       real& b,
-       real& c
-       ) const
-{
-  int rank;
-  real pivot_ratio = 0.0;
-  real row0[3], row1[3], row2[3];
-  row0[0] = inner(X, X);   row0[1] = inner(X, Y);   row0[2] = inner(X, Z);
-  row1[0] = row0[1]; row1[1] = inner(Y, Y);   row1[2] = inner(Y, Z);
-  row2[0] = row0[2]; row2[1] = row1[2]; row2[2] = inner(Z, Z);
-  rank = Solve3x3( row0, row1, row2, 
-                    inner((*this), X), inner((*this), Y), inner((*this), Z),
-                    &a, &b, &c, &pivot_ratio );
-  return (rank == 3) ? true : false;
 }
 
 int vec3::is_parallel( 
@@ -352,17 +296,6 @@ vec3::perpendicular(
     return true;
 }
  
-
-//| I/O
-void print(const vec3& a)
-{
-    LOG("(%f", a[0]);
-    for(int i = 1; i < 3;++i){
-	LOG(" %f", a[i]);
-    }
-    LOG(") ");
-}
-
 void store(FILE* fp, const vec3& v)
 {
     fprintf(fp, "(%lg", v[0]);
@@ -421,18 +354,6 @@ real vec4::length() const
 { 
     return norm(*this); 
 }
- 
-
-//| I/O
-void print(const vec4& a)
-{
-    LOG("(%g", a[0]);
-    for(int i = 1; i < 4;++i){
-	LOG(" %g", a[i]);
-    }
-    LOG(") ");
-}
-
 
 void store(FILE* fp, const vec4& v)
 {

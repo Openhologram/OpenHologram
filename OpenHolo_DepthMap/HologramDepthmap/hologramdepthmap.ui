@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>299</width>
+    <height>204</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="pbGen">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>30</y>
+      <x>33</x>
+      <y>50</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -43,8 +43,8 @@
    <widget class="QPushButton" name="pbRecon">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>30</y>
+      <x>163</x>
+      <y>50</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -66,13 +66,52 @@
      </size>
     </property>
    </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>33</x>
+      <y>10</y>
+      <width>231</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QRadioButton" name="rbCPU">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>10</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>    C P U</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rbGPU">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>10</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>    G P U</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>299</width>
      <height>21</height>
     </rect>
    </property>
