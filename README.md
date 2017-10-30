@@ -2,4 +2,4 @@
 
 * site : http://www.openholo.org/
 
-1
+{test: 1}
