@@ -2,4 +2,4 @@
 
 * site : http://www.openholo.org/
 
-{test: 6}
+{test: 7}
