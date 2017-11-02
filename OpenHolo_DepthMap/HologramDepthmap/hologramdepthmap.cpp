@@ -48,6 +48,7 @@ void HologramDepthmap::ReconImage()
 {
 	if (!hologram_)
 		hologram_ = new HologramGenerator();
+
 	hologram_->setMode(ui.rbCPU->isChecked());
 
 	if (!hologram_->readConfig())

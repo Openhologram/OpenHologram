@@ -2,8 +2,10 @@ var searchData=
 [
   ['f_5ffield_5f',['f_field_',['../class_hologram_generator.html#aab46865a7ac5dfd83fd79e6ed9196199',1,'HologramGenerator']]],
   ['far_5fdepthmap',['far_depthmap',['../struct_hologram_params.html#a0c44087c8c25cf3f1541ea852afc0b46',1,'HologramParams']]],
+  ['fft_5fplan_5fbwd_5f',['fft_plan_bwd_',['../_hologram_generator___c_p_u_8cpp.html#aea4e696f4c2e62313a233716cf5d8199',1,'HologramGenerator_CPU.cpp']]],
+  ['fft_5fplan_5ffwd_5f',['fft_plan_fwd_',['../_hologram_generator___c_p_u_8cpp.html#a5c384b7ea1a2cff8db48390cc07b9934',1,'HologramGenerator_CPU.cpp']]],
   ['fftshift',['fftShift',['../class_hologram_generator.html#a936635d2566fcff4b496e1f3eb37c2f4',1,'HologramGenerator']]],
-  ['fftwshift',['fftwShift',['../class_hologram_generator.html#a35d3aa79a6f24504d0cca001e1af668d',1,'HologramGenerator']]],
+  ['fftwshift',['fftwShift',['../class_hologram_generator.html#a5186d7395820ad0c820dfa571c465986',1,'HologramGenerator']]],
   ['field_5flens',['field_lens',['../struct_hologram_params.html#ab6dfb851c46e31abedc7b47dff4c42ae',1,'HologramParams']]],
   ['file_5flog',['file_log',['../sys_8cpp.html#ad4aeabee51d403c6adbe8776e356aded',1,'sys.cpp']]],
   ['file_5fread_5fopen',['file_read_open',['../sys_8cpp.html#a7e0ee23a66fc76a68a4d36db9052a2cd',1,'file_read_open(const WChar *fname):&#160;sys.cpp'],['../sys_8cpp.html#aec8cac0ffd33739845c220f437d3b288',1,'file_read_open(const WChar *fname, const WChar *mode):&#160;sys.cpp'],['../sys_8h.html#a7e0ee23a66fc76a68a4d36db9052a2cd',1,'file_read_open(const WChar *fname):&#160;sys.cpp'],['../sys_8h.html#aec8cac0ffd33739845c220f437d3b288',1,'file_read_open(const WChar *fname, const WChar *mode):&#160;sys.cpp']]],

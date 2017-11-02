@@ -35,21 +35,35 @@ The following is the procedure of it and functions called form it..
  - CUDA 8.0
  - FFTW 3.3.5
 
-@section build How to Build 
+@section build How to Build Source Codes
 Before building an execution file, you need to install MS Visual Studio 2015 C++ and Qt, also CUDA for the GPU execution. 
  1. Download the source code from <a href="https://github.com/Openhologram/OpenHologram/tree/master/OpenHolo_DepthMap">here</a>.
  2. Go to the directory 'HologramDepthmap'.
  3. Open the Visual Studio soulution file, 'HologramDepthmap.sln'. 
- 4. Check the configuation of the Qt & CUDA to work with the Visual Studio.
- 5. To use FFTW, copy 'libfftw3-3.dll' into the 'bin' directory and copy 'libfftw3-3.lib' into the 'lib' directory.
- 6. Visual Studio Build Menu -> Configuration Menu, set "Release" for the Active solution configuration, "x64" for the Active solution platform.
- 7. Set 'HologramDepthmap' as a StartUp Project.
- 8. Build a Solution.
- 9. After building, you can find the execution file, 'HologramDepthmap.exe' under the 'bin' directory.
- 10. Execute 'HologramDepthmap.exe', then you can see the following GUI of the sample program. <br><br>
+ 4. Check the configuation of the Qt & CUDA to work with the Visual Studio. 
+ 5. For Qt, you may need to set QTDIR environment variable -> System Properties->Advanced->Environment Variable.
+ 6. To use FFTW, copy 'libfftw3-3.dll' into the 'bin' directory and copy 'libfftw3-3.lib' into the 'lib' directory.
+ 7. Visual Studio Build Menu -> Configuration Menu, set "Release" for the Active solution configuration, "x64" for the Active solution platform.
+ 8. Set 'HologramDepthmap' as a StartUp Project.
+ 9. Build a Solution.
+ 10. After building, you can find the execution file, 'HologramDepthmap.exe' under the 'bin' directory.
+ 11. Execute 'HologramDepthmap.exe', then you can see the following GUI of the sample program. <br><br>
   @image html doc_exe.png "the Sample Program & its Execution"
   @image latex doc_exe.png "the Sample Program & its Execution"
- */
+
+  */
+
+/*
+  @section setup How to Install a sample program
+  After installing, user can execute the sample program without building the sources and installing Qt & Visual Studio.
+  1. Download 'Setup.zip' file from the directory, 'Setup' - setup.exe & Setup.msi
+  2. Upzip the zip file.
+  3. Execute 'setup.exe'.
+  4. Then, the setup process installs a sample program.
+  5. User can specify the position that the program is installed.
+  6. After finishing the installation, user can find an execution file, 'HologramDepthmap.exe' under the installed directory.
+  7. To reinstall the program, first remove the installed program using control panel.
+*/
 
  /**
  * \defgroup init_module Initialize
@@ -74,12 +88,14 @@ Before building an execution file, you need to install MS Visual Studio 2015 C++
 #include <QtWidgets/qmessagebox.h>
 #include <vector>
 #include <cufft.h>
+#include "Hologram/fftw3.h"
 
 using namespace graphics;
 
 /**
 * @brief Structure variable for hologram paramemters
-* @details This structure has all parameters for generating a hologram, which is read from a config file.
+* @details This structure has all necessary parameters for generating a hologram. 
+      It is read from the configuration file, 'config_openholo.txt'.
 */
 struct HologramParams{
 	
@@ -168,8 +184,8 @@ private:
 	void Calc_Holo_by_Depth(int frame);
 	void Calc_Holo_CPU(int frame);
 	void Calc_Holo_GPU(int frame);
-	void Propagation_AngularSpectrum_CPU(char domain, Complex* input_u, double propagation_dist);
-	void Propagation_AngularSpectrum_GPU(char domain, cufftDoubleComplex* input_u, double propagation_dist);
+	void Propagation_AngularSpectrum_CPU(Complex* input_u, double propagation_dist);
+	void Propagation_AngularSpectrum_GPU(cufftDoubleComplex* input_u, double propagation_dist);
 	/** @} */
 
 	/** \ingroup encode_modulel
@@ -187,7 +203,7 @@ private:
 	void get_rand_phase_value(Complex& rand_phase_val);
 	void get_shift_phase_value(Complex& shift_phase_val, int idx, ivec2 sig_location);
 
-	void fftwShift(Complex* in, Complex* out, int nx, int ny, int type, bool bNomalized = false);
+	void fftwShift(Complex* src, Complex* dst, fftw_complex* in, fftw_complex* out, int nx, int ny, int type, bool bNomalized = false);
 	void exponent_complex(Complex* val);
 	void fftShift(int nx, int ny, Complex* input, Complex* output);
 
@@ -198,25 +214,26 @@ private:
 
 	/** \ingroup recon_module
 	* @{ */
-	void Reconstruction(Complex* hh_e);
-	void Test_Propagation_to_Eye_Pupil(Complex* hh_e);
+	void Reconstruction(fftw_complex* in, fftw_complex* out);
+	void Test_Propagation_to_Eye_Pupil(fftw_complex* in, fftw_complex* out);
 	void Write_Simulation_image(int num, double val);
 	void circshift(Complex* in, Complex* out, int shift_x, int shift_y, int nx, int ny);
 	/** @} */
 
 private:
 
-	bool					isCPU_;						///< if true, it is implemeted on the CPU, otherwise on the GPU.
+	bool					isCPU_;						///< if true, it is implemented on the CPU, otherwise on the GPU.
 
-	unsigned char*			img_src_gpu_;				///< GPU variable - image source data
-	unsigned char*			dimg_src_gpu_;				///< GPU variable - depth map data
-	double*					depth_index_gpu_;			///< GPU variable - quantized depth map data
+	unsigned char*			img_src_gpu_;				///< GPU variable - image source data, values are from 0 to 255.
+	unsigned char*			dimg_src_gpu_;				///< GPU variable - depth map data, values are from 0 to 255.
+	double*					depth_index_gpu_;			///< GPU variable - quantized depth map data.
 	
-	double*					img_src_;					///< CPU variable - image source data
-	double*					dmap_src_;					///< CPU variable - depth map data
-	double*					depth_index_;				///< CPU variable - quantized depth map data
-	int*					alpha_map_;					///< CPU variable - calculated alpha map data
-	double*					dmap_;						///< CPU variable - physical distances of depth map
+	double*					img_src_;					///< CPU variable - image source data, values are from 0 to 1.
+	double*					dmap_src_;					///< CPU variable - depth map data, values are from 0 to 1.
+	double*					depth_index_;				///< CPU variable - quantized depth map data.
+	int*					alpha_map_;					///< CPU variable - calculated alpha map data, values are 0 or 1.
+
+	double*					dmap_;						///< CPU variable - physical distances of depth map.
 	
 	double					dstep_;						///< the physical increment of each depth map layer.
 	std::vector<double>		dlevel_;					///< the physical value of all depth map layer.
@@ -264,6 +281,7 @@ private:
 	double					sim_to_;						///< reconstruction variable for testing
 	int						sim_step_num_;					///< reconstruction variable for testing
 	double*					sim_final_;						///< reconstruction variable for testing
+	Complex*				hh_complex_;					///< reconstruction variable for testing
 
 };
 

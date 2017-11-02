@@ -71,7 +71,7 @@ extern "C"
 	* @param nx : the number of column of the input data
 	* @param ny : the number of row of the input data
 	* @param u_o_gpu_ : output variable
-	* @param img_src_gpu_ : input image data read
+	* @param img_src_gpu_ : input image data 
 	* @param dimg_src_gpu_ : input depth map data
 	* @param depth_index_gpu_ : input quantized depth map data
 	* @param dtr : current working depth level
@@ -278,7 +278,12 @@ void HologramGenerator::Calc_Holo_GPU(int frame)
 			dtr, rand_phase_val.a, rand_phase_val.b, carrier_phase_delay.a, carrier_phase_delay.b, FLAG_CHANGE_DEPTH_QUANTIZATION, DEFAULT_DEPTH_QUANTIZATION);
 
 		if (Propagation_Method_ == 0)
-			Propagation_AngularSpectrum_GPU('S', u_o_gpu_, -temp_depth);
+		{
+			HANDLE_ERROR(cudaMemsetAsync(k_temp_d_, 0, sizeof(cufftDoubleComplex)*N, stream_));
+			cudaFFT(stream_, pnx, pny, u_o_gpu_, k_temp_d_, -1);
+
+			Propagation_AngularSpectrum_GPU(u_o_gpu_, -temp_depth);
+		}
 
 		LOG("Frame#: %d, Depth: %d of %d, z = %f mm\n", frame, dtr, params_.num_of_depth, -temp_depth * 1000);
 
@@ -299,13 +304,11 @@ void HologramGenerator::Calc_Holo_GPU(int frame)
 /**
 * @brief Angular spectrum propagation method for GPU implementation.
 * @details The propagation results of all depth levels are accumulated in the variable 'u_complex_gpu_'.
-* @param domain : Spatial domain -> 'S', Frequency domain -> 'F'
-*  If the input data is in the spatial domain, this function converts it to the frequency domain.
 * @param input_u : each depth plane data.
 * @param propagation_dist : the distance from the object to the hologram plane.
 * @see Calc_Holo_by_Depth, Calc_Holo_GPU, cudaFFT
 */
-void HologramGenerator::Propagation_AngularSpectrum_GPU(char domain, cufftDoubleComplex* input_u, double propagation_dist)
+void HologramGenerator::Propagation_AngularSpectrum_GPU(cufftDoubleComplex* input_u, double propagation_dist)
 {
 	int pnx = params_.pn[0];
 	int pny = params_.pn[1];
@@ -315,12 +318,6 @@ void HologramGenerator::Propagation_AngularSpectrum_GPU(char domain, cufftDouble
 	double ssx = params_.ss[0];
 	double ssy = params_.ss[1];
 	double lambda = params_.lambda;
-
-	if (domain == 'S')
-	{
-		HANDLE_ERROR(cudaMemsetAsync(k_temp_d_, 0, sizeof(cufftDoubleComplex)*N, stream_));
-		cudaFFT(stream_, pnx, pny, input_u, k_temp_d_, -1);
-	}
 
 	cudaPropagation_AngularSpKernel(stream_, pnx, pny, k_temp_d_, u_complex_gpu_, 
 		ppx, ppy, ssx, ssy, lambda, params_.k, propagation_dist);
@@ -356,7 +353,7 @@ void HologramGenerator::encoding_GPU(int cropx1, int cropx2, int cropy1, int cro
 	HANDLE_ERROR(cudaMemsetAsync(k_temp_d_, 0, sizeof(cufftDoubleComplex)*pnx*pny, stream_));
 	cudaGetFringe(stream_, pnx, pny, u_complex_gpu_, k_temp_d_, sig_location[0], sig_location[1], ssx, ssy, ppx, ppy, PI);
 
-	cufftDoubleComplex* sample_fd = new cufftDoubleComplex[pnx*pny];
+	cufftDoubleComplex* sample_fd = (cufftDoubleComplex*)malloc(sizeof(cufftDoubleComplex)*pnx*pny);
 	memset(sample_fd, 0.0, sizeof(cufftDoubleComplex)*pnx*pny);
 
 	HANDLE_ERROR(cudaMemcpyAsync(sample_fd, k_temp_d_, sizeof(cufftDoubleComplex)*pnx*pny, cudaMemcpyDeviceToHost), stream_);
@@ -367,16 +364,16 @@ void HologramGenerator::encoding_GPU(int cropx1, int cropx2, int cropy1, int cro
 		u255_fringe_[i] = sample_fd[i].x;
 	}
 
-	delete sample_fd;
+	free(sample_fd);
 }
 
 /*
 void HologramGenerator::writeImage_fromGPU(QString imgname, int pnx, int pny, cufftDoubleComplex* gpu_data)
 {
-	cufftDoubleComplex* cpu_data = new cufftDoubleComplex[pnx*pny];
+	cufftDoubleComplex* cpu_data = (cufftDoubleComplex*)malloc(sizeof(cufftDoubleComplex)*pnx*pny);
 	memset(cpu_data, 0.0, sizeof(cufftDoubleComplex)*pnx*pny);
 
-	double* data = new double[pnx*pny];
+	double* data = (double*)malloc(sizeof(double)*pnx*pny);
 
 	HANDLE_ERROR(cudaMemcpyAsync(cpu_data, gpu_data, sizeof(cufftDoubleComplex)*pnx*pny, cudaMemcpyDeviceToHost), stream_);
 	for (int i = 0; i < pnx*pny; ++i)
@@ -386,5 +383,7 @@ void HologramGenerator::writeImage_fromGPU(QString imgname, int pnx, int pny, cu
 
 	writeIntensity_gray8_bmp(imgname.toStdString().c_str(),pnx, pny, data );
 
-	delete cpu_data, data;
+	free(cpu_data);
+	free(data);
+
 }*/

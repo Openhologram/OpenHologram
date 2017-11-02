@@ -1,7 +1,9 @@
 
 #include	"Hologram/HologramGenerator.h"
-#include	"Hologram/fftw3.h"
 #include    "graphics/sys.h"
+
+fftw_plan fft_plan_fwd_;
+fftw_plan fft_plan_bwd_;
 
 /**
 * @brief Initialize variables for the CPU implementation.
@@ -10,24 +12,25 @@
 */
 void HologramGenerator::init_CPU()
 {
-	if (img_src_)	delete img_src_;
-	img_src_ = new double[params_.pn[0] * params_.pn[1]];
+	if (img_src_)	free(img_src_);
+	img_src_ = (double*)malloc(sizeof(double)*params_.pn[0]*params_.pn[1]);
 
-	if (dmap_src_) delete dmap_src_;
-	dmap_src_ = new double[params_.pn[0] * params_.pn[1]];
+	if (dmap_src_) free(dmap_src_);
+	dmap_src_ = (double*)malloc(sizeof(double)*params_.pn[0]*params_.pn[1]);
 
-	if (alpha_map_) delete alpha_map_;
-	alpha_map_ = new int[params_.pn[0] * params_.pn[1]];
+	if (alpha_map_) free(alpha_map_);
+	alpha_map_ = (int*)malloc(sizeof(int) * params_.pn[0] * params_.pn[1] );
 
-	if (depth_index_) delete depth_index_;
-	depth_index_ = new double[params_.pn[0] * params_.pn[1]];
+	if (depth_index_) free(depth_index_);
+	depth_index_ = (double*)malloc(sizeof(double) * params_.pn[0] * params_.pn[1]);
 
-	if (dmap_) delete dmap_;
-	dmap_ = new double[params_.pn[0] * params_.pn[1]];
+	if (dmap_) free(dmap_);
+	dmap_ = (double*)malloc(sizeof(double)* params_.pn[0] * params_.pn[1]);
 
-	if (U_complex_)	delete U_complex_;
-	U_complex_ = new Complex[params_.pn[0] * params_.pn[1]];
+	if (U_complex_)	free(U_complex_);
+	U_complex_ = (Complex*)malloc(sizeof(Complex) * params_.pn[0] * params_.pn[1] );
 
+	fftw_cleanup();
 }
 
 /**
@@ -117,8 +120,10 @@ void HologramGenerator::Calc_Holo_CPU(int frame)
 	int pny = params_.pn[1];
 
 	memset(U_complex_, 0.0, sizeof(Complex)*pnx*pny);
-
 	int depth_sz = params_.render_depth.size();
+
+	fftw_complex *in, *out;
+	fft_plan_fwd_ = fftw_plan_dft_2d(pny, pnx, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
 
 	int p = 0;
 #pragma omp parallel for private(p)
@@ -127,13 +132,11 @@ void HologramGenerator::Calc_Holo_CPU(int frame)
 		int dtr = params_.render_depth[p];
 		double temp_depth = dlevel_transform_[dtr - 1];
 
-		Complex* u_o = new Complex[pnx*pny];
+		Complex* u_o = (Complex*)malloc(sizeof(Complex)*pnx*pny);
 		memset(u_o, 0.0, sizeof(Complex)*pnx*pny);
 
 		double sum = 0.0;
-		int i = 0;
-#pragma omp parallel for private(i)
-		for (i = 0; i < pnx * pny; i++)
+		for (int i = 0; i < pnx * pny; i++)
 		{
 			u_o[i].a = img_src_[i] * alpha_map_[i] * (depth_index_[i] == dtr ? 1.0 : 0.0);
 			sum += u_o[i].a;
@@ -149,21 +152,25 @@ void HologramGenerator::Calc_Holo_CPU(int frame)
 			Complex carrier_phase_delay(0, params_.k* temp_depth);
 			exponent_complex(&carrier_phase_delay);
 
-			int i = 0;
-#pragma omp parallel for private(i)
-			for (i = 0; i < pnx * pny; i++)
+			for (int i = 0; i < pnx * pny; i++)
 				u_o[i] = u_o[i] * rand_phase_val * carrier_phase_delay;
 
-			if (Propagation_Method_ == 0) 
-				Propagation_AngularSpectrum_CPU('S', u_o, -temp_depth);
-			
+			if (Propagation_Method_ == 0) {
+				fftwShift(u_o, u_o, in, out, pnx, pny, 1, false);
+				Propagation_AngularSpectrum_CPU(u_o, -temp_depth);
+			}
+
+
 			
 		}
 		else
 			LOG("Frame#: %d, Depth: %d of %d : Nothing here\n", frame, dtr, params_.num_of_depth);
 
-		delete u_o;
+		free(u_o);
 	}
+
+	fftw_destroy_plan(fft_plan_fwd_);	
+	fftw_cleanup();
 
 	//writeIntensity_gray8_real_bmp("final_fr", pnx, pny, U_complex_);
 
@@ -172,13 +179,11 @@ void HologramGenerator::Calc_Holo_CPU(int frame)
 /**
 * @brief Angular spectrum propagation method for CPU implementation.
 * @details The propagation results of all depth levels are accumulated in the variable 'U_complex_'.
-* @param domain : Spatial domain -> 'S', Frequency domain -> 'F'
-*  If the input data is in the spatial domain, this function converts it to the frequency domain.
 * @param input_u : each depth plane data.
 * @param propagation_dist : the distance from the object to the hologram plane.
 * @see Calc_Holo_by_Depth, Calc_Holo_CPU, fftwShift
 */
-void HologramGenerator::Propagation_AngularSpectrum_CPU(char domain, Complex* input_u, double propagation_dist)
+void HologramGenerator::Propagation_AngularSpectrum_CPU(Complex* input_u, double propagation_dist)
 {
 	int pnx = params_.pn[0];
 	int pny = params_.pn[1];
@@ -188,12 +193,7 @@ void HologramGenerator::Propagation_AngularSpectrum_CPU(char domain, Complex* in
 	double ssy = params_.ss[1];
 	double lambda = params_.lambda;
 
-	if (domain == 'S')
-		fftwShift(input_u, input_u, pnx, pny, 1, false);
-
-	int i = 0;
-#pragma omp parallel for private(i)
-	for (i = 0; i < pnx * pny; i++)
+	for (int i = 0; i < pnx * pny; i++)
 	{
 		double x = i % pnx;
 		double y = i / pnx;
@@ -215,7 +215,6 @@ void HologramGenerator::Propagation_AngularSpectrum_CPU(char domain, Complex* in
 		U_complex_[i] = U_complex_[i] + u_frequency;
 	}
 
-	//fftwShift(u_frequency, u_spatial, pnx, pny, -1, true);
 }
 
 /**
@@ -234,7 +233,7 @@ void HologramGenerator::encoding_CPU(int cropx1, int cropx2, int cropy1, int cro
 	int pnx = params_.pn[0];
 	int pny = params_.pn[1];
 
-	Complex* h_crop = new Complex[pnx*pny];
+	Complex* h_crop = (Complex*)malloc(sizeof(Complex) * pnx*pny );
 	memset(h_crop, 0.0, sizeof(Complex)*pnx*pny);
 
 	int p = 0;
@@ -247,7 +246,11 @@ void HologramGenerator::encoding_CPU(int cropx1, int cropx2, int cropy1, int cro
 			h_crop[p] = U_complex_[p];
 	}
 
-	fftwShift(h_crop, h_crop, pnx, pny, -1, true);
+	fftw_complex *in, *out;
+	fft_plan_bwd_ = fftw_plan_dft_2d(pny, pnx, in, out, FFTW_BACKWARD, FFTW_ESTIMATE);
+	fftwShift(h_crop, h_crop, in, out, pnx, pny, -1, true);
+	fftw_destroy_plan(fft_plan_bwd_);
+	fftw_cleanup();
 
 	memset(u255_fringe_, 0.0, sizeof(double)*pnx*pny);
 	int i = 0;
@@ -262,7 +265,7 @@ void HologramGenerator::encoding_CPU(int cropx1, int cropx2, int cropy1, int cro
 
 	//writeIntensity_gray8_bmp("fringe_255", pnx, pny, u255_fringe_);
 
-	delete h_crop;
+	free(h_crop);
 
 }
 
@@ -271,53 +274,50 @@ void HologramGenerator::encoding_CPU(int cropx1, int cropx2, int cropy1, int cro
 * @details It is equivalent to Matlab code, dst = ifftshift(fft2(fftshift(src))).
 * @param src : input data variable
 * @param dst : output data variable
+* @param in : input data pointer connected with FFTW plan
+* @param out : ouput data pointer connected with FFTW plan
 * @param nx : the number of column of the input data
 * @param ny : the number of row of the input data
 * @param type : If type == 1, forward FFT, if type == -1, backward FFT.
 * @param bNomarlized : If bNomarlized == true, normalize the result after FFT.
 * @see Propagation_AngularSpectrum_CPU, encoding_CPU
 */
-void HologramGenerator::fftwShift(Complex* src, Complex* dst, int nx, int ny, int type, bool bNomarlized)
+void HologramGenerator::fftwShift(Complex* src, Complex* dst, fftw_complex* in, fftw_complex* out, int nx, int ny, int type, bool bNomarlized)
 {
-	Complex* tmp = new Complex[nx*ny];
+	Complex* tmp = (Complex*)malloc(sizeof(Complex)*nx*ny);
 	memset(tmp, 0.0, sizeof(Complex)*nx*ny);
 	fftShift(nx, ny, src, tmp);
 
-	fftw_complex *in, *out;
 	in = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * nx * ny);
 	out = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * nx * ny);
 	
-	int i = 0;
-	#pragma omp parallel for private(i)
-	for (i = 0; i < nx*ny; i++)
+	for (int i = 0; i < nx*ny; i++)
 	{
 		in[i][0] = tmp[i].a;
 		in[i][1] = tmp[i].b;
 	}
-	fftw_plan fft_plan;
-	if (type == 1)
-		fft_plan = fftw_plan_dft_2d(ny, nx, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
-	else
-		fft_plan = fftw_plan_dft_2d(ny, nx, in, out, FFTW_BACKWARD, FFTW_ESTIMATE);
-	fftw_execute(fft_plan);
 
+	if (type == 1)
+		fftw_execute_dft(fft_plan_fwd_, in, out);
+	else
+		fftw_execute_dft(fft_plan_bwd_, in, out);
+	
 	int normalF = 1;
 	if (bNomarlized) normalF = nx * ny;
 	memset(tmp, 0, sizeof(Complex)*nx*ny);
 
-	int k = 0;
-	#pragma omp parallel for private(k)
-	for (k = 0; k < nx*ny; k++) {
+	for (int k = 0; k < nx*ny; k++) {
 		tmp[k].a = out[k][0] / normalF;
 		tmp[k].b = out[k][1] / normalF;
 	}
 
-	fftw_destroy_plan(fft_plan);
-	fftw_free(in); fftw_free(out);
+	fftw_free(in); 
+	fftw_free(out);
 
+	memset(dst, 0.0, sizeof(Complex)*nx*ny);
 	fftShift(nx, ny, tmp, dst);
 	
-	delete tmp;
+	free(tmp);
 	
 }
 
@@ -331,11 +331,9 @@ void HologramGenerator::fftwShift(Complex* src, Complex* dst, int nx, int ny, in
 */
 void HologramGenerator::fftShift(int nx, int ny, Complex* input, Complex* output)
 {
-	int i = 0, j = 0;
-#pragma omp parallel for private(i, j)
-	for (i = 0; i < nx; i++)
+	for (int i = 0; i < nx; i++)
 	{
-		for (j = 0; j < ny; j++)
+		for (int j = 0; j < ny; j++)
 		{
 			int ti = i - nx / 2; if (ti < 0) ti += nx;
 			int tj = j - ny / 2; if (tj < 0) tj += ny;
@@ -407,4 +405,276 @@ void HologramGenerator::get_shift_phase_value(Complex& shift_phase_val, int idx,
 		shift_phase_val *= val;
 	}
 
+}
+
+
+//=====Reconstruction =======================================================================
+/**
+* @brief It is a testing function used for the reconstruction.
+*/
+void HologramGenerator::ReconstructImage()
+{
+	if (!u255_fringe_) {
+		//u255_fringe_ = (double*)malloc(sizeof(double)*params_.pn[0] * params_.pn[1]);
+		//if (!readMatFileDouble("u255_fringe.mat", u255_fringe_))
+		LOG("Error: No Hologram Data\n");
+		return;
+	}
+
+	Pixel_pitch_xy_[0] = params_.pp[0] / test_pixel_number_scale_;
+	Pixel_pitch_xy_[1] = params_.pp[1] / test_pixel_number_scale_;
+
+	SLM_pixel_number_xy_[0] = params_.pn[0] / test_pixel_number_scale_;
+	SLM_pixel_number_xy_[1] = params_.pn[1] / test_pixel_number_scale_;
+
+	f_field_ = params_.field_lens;
+
+	if (sim_final_)		free(sim_final_);
+	sim_final_ = (double*)malloc(sizeof(double)*SLM_pixel_number_xy_[0] * SLM_pixel_number_xy_[1]);
+	memset(sim_final_, 0.0, sizeof(double)*SLM_pixel_number_xy_[0] * SLM_pixel_number_xy_[1]);
+
+	double vmax, vmin, vstep, vval;
+	if (sim_step_num_ > 1)
+	{
+		vmax = max(sim_to_, sim_from_);
+		vmin = min(sim_to_, sim_from_);
+		vstep = (sim_to_ - sim_from_) / (sim_step_num_ - 1);
+
+	}
+	else if (sim_step_num_ == 1) {
+		vval = (sim_to_ + sim_from_) / 2.0;
+	}
+
+	fftw_complex *in, *out;
+	fft_plan_fwd_ = fftw_plan_dft_2d(SLM_pixel_number_xy_[1], SLM_pixel_number_xy_[0], in, out, FFTW_FORWARD, FFTW_ESTIMATE);
+
+	if (hh_complex_)		free(hh_complex_);
+	hh_complex_ = (Complex*)malloc(sizeof(Complex) *SLM_pixel_number_xy_[0] * SLM_pixel_number_xy_[1]);
+
+	Test_Propagation_to_Eye_Pupil(in, out);
+
+	if (sim_step_num_ > 0)
+	{
+		for (int vtr = 1; vtr <= sim_step_num_; vtr++)
+		{
+			LOG("Calculating Frame %d of %d \n", vtr, sim_step_num_);
+			if (sim_step_num_ > 1)
+				vval = vmin + (vtr - 1)*vstep;
+			if (sim_type_ == 0)
+				focus_distance_ = vval;
+			else
+				eye_center_xy_[1] = vval;
+
+			Reconstruction(in, out);
+			Write_Simulation_image(vtr, vval);
+		}
+
+	}
+	else {
+
+		Reconstruction(in, out);
+		Write_Simulation_image(0, 0);
+
+	}
+
+	fftw_destroy_plan(fft_plan_fwd_);
+	fftw_cleanup();
+
+	free(hh_complex_);
+	free(sim_final_);
+	sim_final_ = 0;
+	hh_complex_ = 0;
+
+
+}
+
+/**
+* @brief It is a testing function used for the reconstruction.
+*/
+void HologramGenerator::Test_Propagation_to_Eye_Pupil(fftw_complex* in, fftw_complex* out)
+{
+	int pnx = SLM_pixel_number_xy_[0];
+	int pny = SLM_pixel_number_xy_[1];
+	double ppx = Pixel_pitch_xy_[0];
+	double ppy = Pixel_pitch_xy_[1];
+	double F_size_x = pnx*ppx;
+	double F_size_y = pny*ppy;
+	double lambda = params_.lambda;
+
+	Complex* hh = (Complex*)malloc(sizeof(Complex) * pnx*pny);
+
+	for (int k = 0; k < pnx*pny; k++)
+	{
+		hh[k].a = u255_fringe_[k];
+		hh[k].b = 0.0;
+	}
+
+	fftwShift(hh, hh, in, out, pnx, pny, 1, false);
+
+	double pp_ex = lambda * f_field_ / F_size_x;
+	double pp_ey = lambda * f_field_ / F_size_y;
+	double E_size_x = pp_ex*pnx;
+	double E_size_y = pp_ey*pny;
+
+	int p;
+#pragma omp parallel for private(p)
+	for (p = 0; p < pnx * pny; p++)
+	{
+		double x = p % pnx;
+		double y = p / pnx;
+
+		double xe = (-E_size_x / 2.0) + (pp_ex * x);
+		double ye = (E_size_y / 2.0 - pp_ey) - (pp_ey * y);
+
+		double sval = PI / lambda / f_field_ * (xe*xe + ye*ye);
+		Complex kernel(0, sval);
+		exponent_complex(&kernel);
+
+		hh_complex_[p] = hh[p] * kernel;
+
+	}
+
+	free(hh);
+
+}
+
+/**
+* @brief It is a testing function used for the reconstruction.
+*/
+void HologramGenerator::Reconstruction(fftw_complex* in, fftw_complex* out)
+{
+	int pnx = SLM_pixel_number_xy_[0];
+	int pny = SLM_pixel_number_xy_[1];
+	double ppx = Pixel_pitch_xy_[0];
+	double ppy = Pixel_pitch_xy_[1];
+	double F_size_x = pnx*ppx;
+	double F_size_y = pny*ppy;
+	double lambda = params_.lambda;
+	double pp_ex = lambda * f_field_ / F_size_x;
+	double pp_ey = lambda * f_field_ / F_size_y;
+	double E_size_x = pp_ex*pnx;
+	double E_size_y = pp_ey*pny;
+
+	Complex* hh_e_shift = (Complex*)malloc(sizeof(Complex) * pnx*pny);
+	Complex* hh_e_ = (Complex*)malloc(sizeof(Complex) * pnx*pny);
+
+	int eye_shift_by_pnx = round(eye_center_xy_[0] / pp_ex);
+	int eye_shift_by_pny = round(eye_center_xy_[1] / pp_ey);
+	circshift(hh_complex_, hh_e_shift, -eye_shift_by_pnx, eye_shift_by_pny, pnx, pny);
+
+	double f_eye = eye_length_*(f_field_ - focus_distance_) / (eye_length_ + (f_field_ - focus_distance_));
+	double effective_f = f_eye*eye_length_ / (f_eye - eye_length_);
+
+	int p;
+#pragma omp parallel for private(p)
+	for (p = 0; p < pnx * pny; p++)
+	{
+		double x = p % pnx;
+		double y = p / pnx;
+
+		double xe = (-E_size_x / 2.0) + (pp_ex * x);
+		double ye = (E_size_y / 2.0 - pp_ey) - (pp_ey * y);
+
+		Complex eye_propagation_kernel(0, PI / lambda / effective_f * (xe*xe + ye*ye));
+		exponent_complex(&eye_propagation_kernel);
+		int eye_lens_anti_aliasing_mask = (sqrt(xe*xe + ye*ye) < abs(lambda*effective_f / (2.0 * max(pp_ex, pp_ey)))) ? 1 : 0;
+		int eye_pupil_mask = (sqrt(xe*xe + ye*ye) < (eye_pupil_diameter_ / 2.0)) ? 1 : 0;
+
+		hh_e_[p] = hh_e_shift[p] * eye_propagation_kernel * eye_lens_anti_aliasing_mask * eye_pupil_mask;
+
+	}
+
+	fftwShift(hh_e_, hh_e_, in, out, pnx, pny, 1, false);
+
+	double pp_ret_x = lambda*eye_length_ / E_size_x;
+	double pp_ret_y = lambda*eye_length_ / E_size_y;
+	double Ret_size_x = pp_ret_x*pnx;
+	double Ret_size_y = pp_ret_y*pny;
+
+#pragma omp parallel for private(p)
+	for (p = 0; p < pnx * pny; p++)
+	{
+		double x = p % pnx;
+		double y = p / pnx;
+
+		double xr = (-Ret_size_x / 2.0) + (pp_ret_x * x);
+		double yr = (Ret_size_y / 2.0 - pp_ret_y) - (pp_ret_y * y);
+
+		double sval = PI / lambda / eye_length_*(xr*xr + yr*yr);
+		Complex kernel(0, sval);
+		exponent_complex(&kernel);
+
+		sim_final_[p] = (hh_e_[p] * kernel).mag();
+
+	}
+
+	free(hh_e_shift);
+	free(hh_e_);
+
+}
+
+/**
+* @brief It is a testing function used for the reconstruction.
+*/
+void HologramGenerator::Write_Simulation_image(int num, double val)
+{
+	QDir dir("./");
+	if (!dir.exists(QString().fromStdString(RESULT_FOLDER)))
+		dir.mkdir(QString().fromStdString(RESULT_FOLDER));
+
+	QString fname = "./" + QString().fromStdString(RESULT_FOLDER) + "/"
+		+ QString().fromStdString(Simulation_Result_File_Prefix_) + "_"
+		+ QString().fromStdString(RESULT_PREFIX)
+		+ QString().setNum(num)
+		+ QString("_") + (sim_type_ == 0 ? "FOCUS_" : "EYE_Y_") + QString().setNum(round(val * 1000))
+		+ ".bmp";
+
+	int pnx = params_.pn[0];
+	int pny = params_.pn[1];
+	int px = pnx / 3;
+	int py = pny;
+
+	double min_val, max_val;
+	min_val = sim_final_[0];
+	max_val = sim_final_[0];
+	for (int i = 0; i < pnx*pny; ++i)
+	{
+		if (min_val > sim_final_[i])
+			min_val = sim_final_[i];
+		else if (max_val < sim_final_[i])
+			max_val = sim_final_[i];
+	}
+
+	uchar* data = (uchar*)malloc(sizeof(uchar)*pnx*pny);
+	memset(data, 0, sizeof(uchar)*pnx*pny);
+	for (int k = 0; k < pnx*pny; k++)
+		data[k] = (uint)((sim_final_[k] - min_val) / (max_val - min_val) * 255);
+
+	QImage img(data, px, py, QImage::Format::Format_RGB888);
+	img.save(QString(fname));
+
+	free(data);
+
+}
+
+/**
+* @brief It is a testing function used for the reconstruction.
+*/
+void HologramGenerator::circshift(Complex* in, Complex* out, int shift_x, int shift_y, int nx, int ny)
+{
+	int ti, tj;
+	for (int i = 0; i < nx; i++)
+	{
+		for (int j = 0; j < ny; j++)
+		{
+			ti = (i + shift_x) % nx;
+			if (ti < 0)
+				ti = ti + nx;
+			tj = (j + shift_y) % ny;
+			if (tj < 0)
+				tj = tj + ny;
+
+			out[ti + tj * nx] = in[i + j * nx];
+		}
+	}
 }
