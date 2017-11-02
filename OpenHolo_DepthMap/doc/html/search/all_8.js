@@ -3,6 +3,7 @@ var searchData=
   ['handle_5ferror',['HANDLE_ERROR',['../_hologram_generator___g_p_u_8cpp.html#af415eaa6c6ad014020a7ece805612466',1,'HologramGenerator_GPU.cpp']]],
   ['handle_5fnull',['HANDLE_NULL',['../_hologram_generator___g_p_u_8cpp.html#a272418d63407e728044dbd1c32105c08',1,'HologramGenerator_GPU.cpp']]],
   ['handleerror',['HandleError',['../_hologram_generator___g_p_u_8cpp.html#a9d6ad2bdede10ef9931ccf2f53b9ef83',1,'HologramGenerator_GPU.cpp']]],
+  ['hh_5fcomplex_5f',['hh_complex_',['../class_hologram_generator.html#aea01451e2a7a4530f4e2dcbaf74310e0',1,'HologramGenerator']]],
   ['hologram_5f',['hologram_',['../class_hologram_depthmap.html#a377a9b4b25d91185ae587ea2daf73890',1,'HologramDepthmap']]],
   ['hologramdepthmap',['HologramDepthmap',['../class_hologram_depthmap.html',1,'HologramDepthmap'],['../class_hologram_depthmap.html#a46f6e9ffed38be6db578242a66042ef2',1,'HologramDepthmap::HologramDepthmap()']]],
   ['hologramdepthmap_2ecpp',['hologramdepthmap.cpp',['../hologramdepthmap_8cpp.html',1,'']]],

@@ -4,6 +4,6 @@ var searchData=
   ['prepare_5finputdata_5fcpu',['prepare_inputdata_CPU',['../group__load__module.html#ga80874888906a9914028192c85e82a44f',1,'HologramGenerator']]],
   ['prepare_5finputdata_5fgpu',['prepare_inputdata_GPU',['../group__load__module.html#gaf84405eee16a810df5fd0c728910c616',1,'HologramGenerator']]],
   ['proj',['proj',['../namespacegraphics.html#ad7c3df436b18b558a228a6b946b33338',1,'graphics::proj(const vec2 &amp;axis, const vec2 &amp;a)'],['../namespacegraphics.html#a2f77fde30df4f392d4f7c69ce8398ce6',1,'graphics::proj(const vec3 &amp;axis, const vec3 &amp;a)'],['../namespacegraphics.html#a3c1839d9aaf0565372dc999b93dabb12',1,'graphics::proj(const vec4 &amp;axis, const vec4 &amp;a)']]],
-  ['propagation_5fangularspectrum_5fcpu',['Propagation_AngularSpectrum_CPU',['../group__gen__module.html#ga39c3d5b82e583886defa62787b180fa2',1,'HologramGenerator']]],
-  ['propagation_5fangularspectrum_5fgpu',['Propagation_AngularSpectrum_GPU',['../group__gen__module.html#ga26c9182e87b52d91ef6d852bfcca103a',1,'HologramGenerator']]]
+  ['propagation_5fangularspectrum_5fcpu',['Propagation_AngularSpectrum_CPU',['../group__gen__module.html#ga8e3ed25a67341b3996b29a8679018f61',1,'HologramGenerator']]],
+  ['propagation_5fangularspectrum_5fgpu',['Propagation_AngularSpectrum_GPU',['../group__gen__module.html#ga44d10daf29d650a169381f00ab55cbe9',1,'HologramGenerator']]]
 ];

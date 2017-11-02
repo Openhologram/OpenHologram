@@ -32,6 +32,9 @@ HologramGenerator::HologramGenerator()
 	U_complex_ = 0;
 	u255_fringe_ = 0;
 
+	sim_final_ = 0;
+	hh_complex_ = 0;
+
 }
 
 /**
@@ -56,7 +59,7 @@ void HologramGenerator::setMode(bool isCPU)
 }
 
 /**
-* @brief Read parameters from a config file.
+* @brief Read parameters from a config file(config_openholo.txt).
 * @return true if config infomation are sucessfully read, flase otherwise.
 */
 bool HologramGenerator::readConfig()
@@ -234,10 +237,9 @@ void HologramGenerator::initialize()
 	dstep_ = 0;
 	dlevel_.clear();
 
-	if (u255_fringe_)		delete u255_fringe_;
-	u255_fringe_ = new double[params_.pn[0] * params_.pn[1]];
-
-
+	if (u255_fringe_)		free(u255_fringe_);
+	u255_fringe_ = (double*)malloc(sizeof(double) * params_.pn[0] * params_.pn[1]);
+	
 	if (isCPU_)
 		init_CPU();
 	else
@@ -548,7 +550,7 @@ void HologramGenerator::Write_Result_image(int ftr)
 			max_val = u255_fringe_[i];
 	}
 
-	uchar* data = new uchar[pnx*pny];
+	uchar* data = (uchar*)malloc(sizeof(uchar)*pnx*pny);
 	memset(data, 0, sizeof(uchar)*pnx*pny);
 
 	int x = 0;
@@ -559,6 +561,7 @@ void HologramGenerator::Write_Result_image(int ftr)
 	QImage img(data, px, py, QImage::Format::Format_RGB888);
 	img.save(QString(fname));
 
+	free(data);
 }
 
 /*
@@ -583,7 +586,7 @@ void HologramGenerator::writeIntensity_gray8_bmp(const char* fileName, int nx, i
 	strcat(fname, ".bmp");
 
 	//LOG("minval %f, max val %f\n", min_val, max_val);
-	unsigned char* cgh = new unsigned char[n];
+	unsigned char* cgh = (unsigned char*)malloc(sizeof(unsigned char)*n);
 
 	for (int i = 0; i < n; ++i){
 		double val = 255 * ((intensity[i] - min_val) / (max_val - min_val));
@@ -593,14 +596,14 @@ void HologramGenerator::writeIntensity_gray8_bmp(const char* fileName, int nx, i
 	QImage img(cgh, nx, ny, QImage::Format::Format_Grayscale8);
 	img.save(QString(fname));
 
-	delete cgh;
+	free(cgh);
 }
 
 void HologramGenerator::writeIntensity_gray8_bmp(const char* fileName, int nx, int ny, Complex* complexvalue)
 {
 	const int n = nx*ny;
 
-	double* intensity = new double[n];
+	double* intensity = (double*)malloc(sizeof(double)*n);
 	for (int i = 0; i < n; i++)
 		intensity[i] = complexvalue[i].a;
 		//intensity[i] = complexvalue[i].mag2();
@@ -623,9 +626,7 @@ void HologramGenerator::writeIntensity_gray8_bmp(const char* fileName, int nx, i
 
 	//LOG("minval %e, max val %e\n", min_val, max_val);
 
-	unsigned char* cgh;
-
-	cgh = new unsigned char[n];
+	unsigned char* cgh = (unsigned char*)malloc(sizeof(unsigned char)*n);
 
 	for (int i = 0; i < n; ++i) {
 		double val = (intensity[i] - min_val) / (max_val - min_val);
@@ -640,14 +641,15 @@ void HologramGenerator::writeIntensity_gray8_bmp(const char* fileName, int nx, i
 	img.save(QString(fname));
 
 
-	delete intensity, cgh;
+	free(intensity);
+	free(cgh);
 }
 
 void HologramGenerator::writeIntensity_gray8_real_bmp(const char* fileName, int nx, int ny, Complex* complexvalue)
 {
 	const int n = nx*ny;
 
-	double* intensity = new double[n];
+	double* intensity = (double*)malloc(sizeof(double)*n);
 	for (int i = 0; i < n; i++)
 		intensity[i] = complexvalue[i].a;
 
@@ -669,9 +671,7 @@ void HologramGenerator::writeIntensity_gray8_real_bmp(const char* fileName, int 
 
 	//LOG("minval %e, max val %e\n", min_val, max_val);
 
-	unsigned char* cgh;
-
-	cgh = new unsigned char[n];
+	unsigned char* cgh = (unsigned char*)malloc(sizeof(new unsigned char)*n);
 
 	for (int i = 0; i < n; ++i) {
 		double val = (intensity[i] - min_val) / (max_val - min_val);
@@ -685,271 +685,11 @@ void HologramGenerator::writeIntensity_gray8_real_bmp(const char* fileName, int 
 	QImage img(cgh, nx, ny, QImage::Format::Format_Grayscale8);
 	img.save(QString(fname));
 
-
-	delete intensity, cgh;
-}
-*/
-
-//============================================================================================
-/**
-* @brief It is a testing function used for the reconstruction.
-*/
-void HologramGenerator::ReconstructImage()
-{
-	if (!u255_fringe_) {
-		//u255_fringe_ = new double[params_.pn[0] * params_.pn[1]];
-		//if (!readMatFileDouble("u255_fringe.mat", u255_fringe_))
-		LOG("Error: No Hologram Data\n");
-		return;
-	}
-
-	Pixel_pitch_xy_[0] = params_.pp[0] / test_pixel_number_scale_;
-	Pixel_pitch_xy_[1] = params_.pp[1] / test_pixel_number_scale_;
-
-	SLM_pixel_number_xy_[0] = params_.pn[0] / test_pixel_number_scale_;
-	SLM_pixel_number_xy_[1] = params_.pn[1] / test_pixel_number_scale_;
-
-	f_field_ = params_.field_lens;
-
-	sim_final_ = new double[SLM_pixel_number_xy_[0] * SLM_pixel_number_xy_[1]];
-	memset(sim_final_, 0.0, sizeof(double)*SLM_pixel_number_xy_[0] * SLM_pixel_number_xy_[1]);
-
-	double vmax, vmin, vstep, vval;
-	if (sim_step_num_ > 1)
-	{
-		vmax = max(sim_to_, sim_from_);
-		vmin = min(sim_to_, sim_from_);
-		vstep = (sim_to_ - sim_from_) / (sim_step_num_ - 1);
-
-	} else if (sim_step_num_ == 1) {
-		vval = (sim_to_ + sim_from_) / 2.0;
-	}
-
-	Complex* hh_e = new Complex[SLM_pixel_number_xy_[0] * SLM_pixel_number_xy_[1]];
-	Test_Propagation_to_Eye_Pupil(hh_e);
-
-	if (sim_step_num_ > 0)
-	{
-		for (int vtr = 1; vtr <= sim_step_num_; vtr++)
-		{
-			LOG("Calculating Frame %d of %d \n", vtr, sim_step_num_);
-			if (sim_step_num_ > 1)
-				vval = vmin + (vtr - 1)*vstep;
-			if (sim_type_ == 0)
-				focus_distance_ = vval;
-			else
-				eye_center_xy_[1] = vval;
-
-			Reconstruction(hh_e);
-			Write_Simulation_image(vtr, vval);
-		}
-
-	} else {
-		
-		Reconstruction(hh_e);
-		Write_Simulation_image(0,0);
-
-	}
-	
-	delete hh_e;
+	free(intensity);
+	free(cgh);
 
 }
-
-/**
-* @brief It is a testing function used for the reconstruction.
 */
-void HologramGenerator::Test_Propagation_to_Eye_Pupil(Complex* hh_e)
-{
-	int pnx = SLM_pixel_number_xy_[0];
-	int pny = SLM_pixel_number_xy_[1];
-	double ppx = Pixel_pitch_xy_[0];
-	double ppy = Pixel_pitch_xy_[1];
-	double F_size_x = pnx*ppx;
-	double F_size_y = pny*ppy;
-	double lambda = params_.lambda;
-
-	Complex* hh = new Complex[pnx*pny];
-	Complex* hh_e_0 = new Complex[pnx*pny];
-	for (int k = 0; k < pnx*pny; k++)
-	{
-		hh[k].a = u255_fringe_[k];
-		hh[k].b = 0.0;
-
-		hh_e_0[k].a = 0.0;		
-		hh_e_0[k].b = 0.0;
-	}
-
-	fftwShift(hh, hh_e_0, pnx, pny, 1, false);
-		
-	double pp_ex = lambda * f_field_ / F_size_x;
-	double pp_ey = lambda * f_field_ / F_size_y;
-	double E_size_x = pp_ex*pnx;
-	double E_size_y = pp_ey*pny;
-	
-	memset(hh, 0.0, sizeof(Complex)*pnx*pny);
-
-	int p;
-#pragma omp parallel for private(p)
-	for (p = 0; p < pnx * pny; p++)
-	{
-		double x = p % pnx;
-		double y = p / pnx;
-
-		double xe = (-E_size_x / 2.0) + (pp_ex * x);
-		double ye = (E_size_y / 2.0 - pp_ey) - (pp_ey * y);
-
-		double sval = PI / lambda / f_field_ * (xe*xe + ye*ye);
-		Complex kernel(0, sval);
-		exponent_complex(&kernel);
-
-		hh_e[p] = hh_e_0[p] * kernel;
-
-	}
-	
-	delete hh, hh_e_0;
-
-}
-
-/**
-* @brief It is a testing function used for the reconstruction.
-*/
-void HologramGenerator::Reconstruction(Complex* hh_e)
-{
-	int pnx = SLM_pixel_number_xy_[0];
-	int pny = SLM_pixel_number_xy_[1];
-	double ppx = Pixel_pitch_xy_[0];
-	double ppy = Pixel_pitch_xy_[1];
-	double F_size_x = pnx*ppx;
-	double F_size_y = pny*ppy;
-	double lambda = params_.lambda;
-	double pp_ex = lambda * f_field_ / F_size_x;
-	double pp_ey = lambda * f_field_ / F_size_y;
-	double E_size_x = pp_ex*pnx;
-	double E_size_y = pp_ey*pny;
-
-	Complex* hh_e_shift = new Complex[pnx*pny];
-	Complex* hh_e_ = new Complex[pnx*pny];
-
-	int eye_shift_by_pnx = round(eye_center_xy_[0] / pp_ex);
-	int eye_shift_by_pny = round(eye_center_xy_[1] / pp_ey);
-	circshift(hh_e, hh_e_shift, -eye_shift_by_pnx, eye_shift_by_pny, pnx, pny);
-		
-	double f_eye = eye_length_*(f_field_ - focus_distance_) / (eye_length_ + (f_field_ - focus_distance_));
-	double effective_f = f_eye*eye_length_ / (f_eye - eye_length_);
-
-	int p;
-#pragma omp parallel for private(p)
-	for (p = 0; p < pnx * pny; p++)
-	{
-		double x = p % pnx;
-		double y = p / pnx;
-
-		double xe = (-E_size_x / 2.0) + (pp_ex * x);
-		double ye = (E_size_y / 2.0 - pp_ey) - (pp_ey * y);
-
-		Complex eye_propagation_kernel(0, PI / lambda / effective_f * (xe*xe + ye*ye));
-		exponent_complex(&eye_propagation_kernel);
-		int eye_lens_anti_aliasing_mask = ( sqrt(xe*xe+ye*ye) < abs(lambda*effective_f / (2.0 * max(pp_ex, pp_ey))) )?1:0;
-		int eye_pupil_mask = (sqrt(xe*xe+ye*ye) < (eye_pupil_diameter_/2.0))?1:0;
-
-		hh_e_[p] = hh_e_shift[p] * eye_propagation_kernel * eye_lens_anti_aliasing_mask * eye_pupil_mask;
-
-	}
-
-	Complex* hh_retina_0 = new Complex[pnx*pny];
-	memset(hh_retina_0, 0.0, sizeof(Complex)*pnx*pny);
-	fftwShift(hh_e_, hh_retina_0, pnx, pny, 1, false);
-
-	double pp_ret_x = lambda*eye_length_/ E_size_x;
-	double pp_ret_y = lambda*eye_length_ / E_size_y;
-	double Ret_size_x = pp_ret_x*pnx;
-	double Ret_size_y = pp_ret_y*pny;
-
-#pragma omp parallel for private(p)
-	for (p = 0; p < pnx * pny; p++)
-	{
-		double x = p % pnx;
-		double y = p / pnx;
-
-		double xr = (-Ret_size_x / 2.0) + (pp_ret_x * x);
-		double yr = (Ret_size_y / 2.0 - pp_ret_y) - (pp_ret_y * y);
-
-		double sval = PI/lambda/ eye_length_*(xr*xr + yr*yr);
-		Complex kernel(0, sval);
-		exponent_complex(&kernel);
-
-		sim_final_[p] = (hh_retina_0[p] * kernel).mag();
-
-	}
-
-	delete hh_e_shift, hh_retina_0, hh_e_;
-
-}
-
-/**
-* @brief It is a testing function used for the reconstruction.
-*/
-void HologramGenerator::Write_Simulation_image(int num, double val)
-{
-	QDir dir("./");
-	if (!dir.exists(QString().fromStdString(RESULT_FOLDER)))
-		dir.mkdir(QString().fromStdString(RESULT_FOLDER));
-
-	QString fname = "./" + QString().fromStdString(RESULT_FOLDER) + "/"
-		+ QString().fromStdString(Simulation_Result_File_Prefix_) + "_"
-		+ QString().fromStdString(RESULT_PREFIX)
-		+ QString().setNum(num) 
-		+ QString("_") + (sim_type_==0?"FOCUS_":"EYE_Y_") + QString().setNum(round(val*1000))
-		+ ".bmp";
-
-	int pnx = params_.pn[0];
-	int pny = params_.pn[1];
-	int px = pnx / 3;
-	int py = pny;
-
-	double min_val, max_val;
-	min_val = sim_final_[0];
-	max_val = sim_final_[0];
-	for (int i = 0; i < pnx*pny; ++i)
-	{
-		if (min_val > sim_final_[i])
-			min_val = sim_final_[i];
-		else if (max_val < sim_final_[i])
-			max_val = sim_final_[i];
-	}
-
-	uchar* data = new uchar[pnx*pny];
-	memset(data, 0, sizeof(uchar)*pnx*pny);
-	for (int k = 0; k < pnx*pny; k++)
-		data[k] = (uint)((sim_final_[k] - min_val) / (max_val - min_val) * 255);
-
-	QImage img(data, px, py, QImage::Format::Format_RGB888);
-	img.save(QString(fname));
-
-}
-
-/**
-* @brief It is a testing function used for the reconstruction.
-*/
-void HologramGenerator::circshift(Complex* in, Complex* out, int shift_x, int shift_y, int nx, int ny)
-{
-	int ti, tj;
-	for (int i = 0; i < nx; i++)
-	{
-		for (int j = 0; j < ny; j++)
-		{
-			ti = (i + shift_x) % nx;
-			if (ti < 0)
-				ti = ti + nx;
-			tj = (j + shift_y) % ny;
-			if (tj < 0)
-				tj = tj + ny;
-
-			out[ti + tj * nx] = in[i + j * nx];
-		}
-	}
-}
-
 
 /*
 bool HologramGenerator::readMatFileDouble(const char* fileName, double * val)
