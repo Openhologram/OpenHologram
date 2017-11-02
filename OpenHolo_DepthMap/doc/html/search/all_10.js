@@ -10,7 +10,7 @@ var searchData=
   ['reconstruction',['Reconstruction',['../group__recon__module.html',1,'']]],
   ['reconimage',['ReconImage',['../class_hologram_depthmap.html#a5f4e31da378fa5f645deb2e75f98b2cf',1,'HologramDepthmap']]],
   ['reconstructimage',['ReconstructImage',['../group__recon__module.html#ga95b6942dc3bee6faeb14b22c1d2cdcf5',1,'HologramGenerator']]],
-  ['reconstruction',['Reconstruction',['../group__recon__module.html#gae5d8774fdf2cc1b115fea03472ac3ad4',1,'HologramGenerator']]],
+  ['reconstruction',['Reconstruction',['../group__recon__module.html#gabaafefa67f15bd107e47187a5ff196a9',1,'HologramGenerator']]],
   ['render_5fdepth',['render_depth',['../struct_hologram_params.html#ae11f1e2d4f9bdd2d2a85b9b1af2a1ae6',1,'HologramParams']]],
   ['reset_5fu_5fepsilon',['reset_u_epsilon',['../namespacegraphics.html#aff2cef2ef2a0c12574340f0fdf7d8d04',1,'graphics']]],
   ['reset_5fzero_5fepsilon',['reset_zero_epsilon',['../namespacegraphics.html#afe3f09eff4995b610ebee2a3a31dc923',1,'graphics']]],

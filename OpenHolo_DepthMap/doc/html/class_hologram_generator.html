@@ -85,7 +85,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae63e227e4e31e846727323f29100575a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of a variable isCPU_(true or false)  <a href="#ae63e227e4e31e846727323f29100575a">More...</a><br /></td></tr>
 <tr class="separator:ae63e227e4e31e846727323f29100575a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8082a4097ccc7ebc5f22e9b846af58f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__init__module.html#ga8082a4097ccc7ebc5f22e9b846af58f6">readConfig</a> ()</td></tr>
-<tr class="memdesc:ga8082a4097ccc7ebc5f22e9b846af58f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read parameters from a config file.  <a href="group__init__module.html#ga8082a4097ccc7ebc5f22e9b846af58f6">More...</a><br /></td></tr>
+<tr class="memdesc:ga8082a4097ccc7ebc5f22e9b846af58f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read parameters from a config file(config_openholo.txt).  <a href="group__init__module.html#ga8082a4097ccc7ebc5f22e9b846af58f6">More...</a><br /></td></tr>
 <tr class="separator:ga8082a4097ccc7ebc5f22e9b846af58f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga52474b4a0097f37f9aa3ba6db6a2145d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__init__module.html#ga52474b4a0097f37f9aa3ba6db6a2145d">initialize</a> ()</td></tr>
 <tr class="memdesc:ga52474b4a0097f37f9aa3ba6db6a2145d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize variables for CPU and GPU implementation.  <a href="group__init__module.html#ga52474b4a0097f37f9aa3ba6db6a2145d">More...</a><br /></td></tr>
@@ -105,9 +105,9 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a5ef667ee363fdb4f9ad85501d9013c65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a5ef667ee363fdb4f9ad85501d9013c65">get_shift_phase_value</a> (<a class="el" href="class_complex.html">Complex</a> &amp;shift_phase_val, int idx, <a class="el" href="structgraphics_1_1ivec2.html">ivec2</a> sig_location)</td></tr>
 <tr class="memdesc:a5ef667ee363fdb4f9ad85501d9013c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the shift phase value.  <a href="#a5ef667ee363fdb4f9ad85501d9013c65">More...</a><br /></td></tr>
 <tr class="separator:a5ef667ee363fdb4f9ad85501d9013c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35d3aa79a6f24504d0cca001e1af668d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a35d3aa79a6f24504d0cca001e1af668d">fftwShift</a> (<a class="el" href="class_complex.html">Complex</a> *in, <a class="el" href="class_complex.html">Complex</a> *out, int nx, int ny, int type, bool bNomalized=false)</td></tr>
-<tr class="memdesc:a35d3aa79a6f24504d0cca001e1af668d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert data from the spatial domain to the frequency domain using 2D FFT on CPU.  <a href="#a35d3aa79a6f24504d0cca001e1af668d">More...</a><br /></td></tr>
-<tr class="separator:a35d3aa79a6f24504d0cca001e1af668d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5186d7395820ad0c820dfa571c465986"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a5186d7395820ad0c820dfa571c465986">fftwShift</a> (<a class="el" href="class_complex.html">Complex</a> *src, <a class="el" href="class_complex.html">Complex</a> *dst, fftw_complex *in, fftw_complex *out, int nx, int ny, int type, bool bNomalized=false)</td></tr>
+<tr class="memdesc:a5186d7395820ad0c820dfa571c465986"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert data from the spatial domain to the frequency domain using 2D FFT on CPU.  <a href="#a5186d7395820ad0c820dfa571c465986">More...</a><br /></td></tr>
+<tr class="separator:a5186d7395820ad0c820dfa571c465986"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d61d08d8b80e791411894083333ca52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a0d61d08d8b80e791411894083333ca52">exponent_complex</a> (<a class="el" href="class_complex.html">Complex</a> *val)</td></tr>
 <tr class="memdesc:a0d61d08d8b80e791411894083333ca52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the exponential of the complex number.  <a href="#a0d61d08d8b80e791411894083333ca52">More...</a><br /></td></tr>
 <tr class="separator:a0d61d08d8b80e791411894083333ca52"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,12 +155,12 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:ga933129778d34f58045a7c765eaf49446"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gen__module.html#ga933129778d34f58045a7c765eaf49446">Calc_Holo_GPU</a> (int frame)</td></tr>
 <tr class="memdesc:ga933129778d34f58045a7c765eaf49446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main method for generating a hologram on the GPU.  <a href="group__gen__module.html#ga933129778d34f58045a7c765eaf49446">More...</a><br /></td></tr>
 <tr class="separator:ga933129778d34f58045a7c765eaf49446"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga39c3d5b82e583886defa62787b180fa2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gen__module.html#ga39c3d5b82e583886defa62787b180fa2">Propagation_AngularSpectrum_CPU</a> (char domain, <a class="el" href="class_complex.html">Complex</a> *input_u, double propagation_dist)</td></tr>
-<tr class="memdesc:ga39c3d5b82e583886defa62787b180fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angular spectrum propagation method for CPU implementation.  <a href="group__gen__module.html#ga39c3d5b82e583886defa62787b180fa2">More...</a><br /></td></tr>
-<tr class="separator:ga39c3d5b82e583886defa62787b180fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga26c9182e87b52d91ef6d852bfcca103a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gen__module.html#ga26c9182e87b52d91ef6d852bfcca103a">Propagation_AngularSpectrum_GPU</a> (char domain, cufftDoubleComplex *input_u, double propagation_dist)</td></tr>
-<tr class="memdesc:ga26c9182e87b52d91ef6d852bfcca103a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angular spectrum propagation method for GPU implementation.  <a href="group__gen__module.html#ga26c9182e87b52d91ef6d852bfcca103a">More...</a><br /></td></tr>
-<tr class="separator:ga26c9182e87b52d91ef6d852bfcca103a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8e3ed25a67341b3996b29a8679018f61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gen__module.html#ga8e3ed25a67341b3996b29a8679018f61">Propagation_AngularSpectrum_CPU</a> (<a class="el" href="class_complex.html">Complex</a> *input_u, double propagation_dist)</td></tr>
+<tr class="memdesc:ga8e3ed25a67341b3996b29a8679018f61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angular spectrum propagation method for CPU implementation.  <a href="group__gen__module.html#ga8e3ed25a67341b3996b29a8679018f61">More...</a><br /></td></tr>
+<tr class="separator:ga8e3ed25a67341b3996b29a8679018f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga44d10daf29d650a169381f00ab55cbe9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gen__module.html#ga44d10daf29d650a169381f00ab55cbe9">Propagation_AngularSpectrum_GPU</a> (cufftDoubleComplex *input_u, double propagation_dist)</td></tr>
+<tr class="memdesc:ga44d10daf29d650a169381f00ab55cbe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angular spectrum propagation method for GPU implementation.  <a href="group__gen__module.html#ga44d10daf29d650a169381f00ab55cbe9">More...</a><br /></td></tr>
+<tr class="separator:ga44d10daf29d650a169381f00ab55cbe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ga13bca055bced0401ac973e4027038794"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__encode__modulel.html#ga13bca055bced0401ac973e4027038794">Encoding_Symmetrization</a> (<a class="el" href="structgraphics_1_1ivec2.html">ivec2</a> sig_location)</td></tr>
 <tr class="memdesc:ga13bca055bced0401ac973e4027038794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode the CGH according to a signal location parameter.  <a href="group__encode__modulel.html#ga13bca055bced0401ac973e4027038794">More...</a><br /></td></tr>
@@ -176,12 +176,12 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:gac262db994dd6cba6767506b40ef2e2a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the result image.  <a href="group__write__module.html#gac262db994dd6cba6767506b40ef2e2a8">More...</a><br /></td></tr>
 <tr class="separator:gac262db994dd6cba6767506b40ef2e2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:gae5d8774fdf2cc1b115fea03472ac3ad4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__recon__module.html#gae5d8774fdf2cc1b115fea03472ac3ad4">Reconstruction</a> (<a class="el" href="class_complex.html">Complex</a> *hh_e)</td></tr>
-<tr class="memdesc:gae5d8774fdf2cc1b115fea03472ac3ad4"><td class="mdescLeft">&#160;</td><td class="mdescRight">It is a testing function used for the reconstruction.  <a href="group__recon__module.html#gae5d8774fdf2cc1b115fea03472ac3ad4">More...</a><br /></td></tr>
-<tr class="separator:gae5d8774fdf2cc1b115fea03472ac3ad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadb486c2d1cbce57e764066ce1aaa3d7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__recon__module.html#gadb486c2d1cbce57e764066ce1aaa3d7a">Test_Propagation_to_Eye_Pupil</a> (<a class="el" href="class_complex.html">Complex</a> *hh_e)</td></tr>
-<tr class="memdesc:gadb486c2d1cbce57e764066ce1aaa3d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">It is a testing function used for the reconstruction.  <a href="group__recon__module.html#gadb486c2d1cbce57e764066ce1aaa3d7a">More...</a><br /></td></tr>
-<tr class="separator:gadb486c2d1cbce57e764066ce1aaa3d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabaafefa67f15bd107e47187a5ff196a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__recon__module.html#gabaafefa67f15bd107e47187a5ff196a9">Reconstruction</a> (fftw_complex *in, fftw_complex *out)</td></tr>
+<tr class="memdesc:gabaafefa67f15bd107e47187a5ff196a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">It is a testing function used for the reconstruction.  <a href="group__recon__module.html#gabaafefa67f15bd107e47187a5ff196a9">More...</a><br /></td></tr>
+<tr class="separator:gabaafefa67f15bd107e47187a5ff196a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7a9102c8d11a3c59379a2dc939a66cdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__recon__module.html#ga7a9102c8d11a3c59379a2dc939a66cdb">Test_Propagation_to_Eye_Pupil</a> (fftw_complex *in, fftw_complex *out)</td></tr>
+<tr class="memdesc:ga7a9102c8d11a3c59379a2dc939a66cdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">It is a testing function used for the reconstruction.  <a href="group__recon__module.html#ga7a9102c8d11a3c59379a2dc939a66cdb">More...</a><br /></td></tr>
+<tr class="separator:ga7a9102c8d11a3c59379a2dc939a66cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8be39eb96e82e45b22fc934e9eb85395"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__recon__module.html#ga8be39eb96e82e45b22fc934e9eb85395">Write_Simulation_image</a> (int num, double val)</td></tr>
 <tr class="memdesc:ga8be39eb96e82e45b22fc934e9eb85395"><td class="mdescLeft">&#160;</td><td class="mdescRight">It is a testing function used for the reconstruction.  <a href="group__recon__module.html#ga8be39eb96e82e45b22fc934e9eb85395">More...</a><br /></td></tr>
 <tr class="separator:ga8be39eb96e82e45b22fc934e9eb85395"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,28 +192,28 @@ Private Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a4e214c89a9ced58dda34721c0268f760"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a4e214c89a9ced58dda34721c0268f760">isCPU_</a></td></tr>
-<tr class="memdesc:a4e214c89a9ced58dda34721c0268f760"><td class="mdescLeft">&#160;</td><td class="mdescRight">if true, it is implemeted on the CPU, otherwise on the GPU.  <a href="#a4e214c89a9ced58dda34721c0268f760">More...</a><br /></td></tr>
+<tr class="memdesc:a4e214c89a9ced58dda34721c0268f760"><td class="mdescLeft">&#160;</td><td class="mdescRight">if true, it is implemented on the CPU, otherwise on the GPU.  <a href="#a4e214c89a9ced58dda34721c0268f760">More...</a><br /></td></tr>
 <tr class="separator:a4e214c89a9ced58dda34721c0268f760"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f6013769e85df3f5e97906fc2f90083"><td class="memItemLeft" align="right" valign="top">unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a5f6013769e85df3f5e97906fc2f90083">img_src_gpu_</a></td></tr>
-<tr class="memdesc:a5f6013769e85df3f5e97906fc2f90083"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPU variable - image source data.  <a href="#a5f6013769e85df3f5e97906fc2f90083">More...</a><br /></td></tr>
+<tr class="memdesc:a5f6013769e85df3f5e97906fc2f90083"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPU variable - image source data, values are from 0 to 255.  <a href="#a5f6013769e85df3f5e97906fc2f90083">More...</a><br /></td></tr>
 <tr class="separator:a5f6013769e85df3f5e97906fc2f90083"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58d149b34275c0254f6ac8792519cac2"><td class="memItemLeft" align="right" valign="top">unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a58d149b34275c0254f6ac8792519cac2">dimg_src_gpu_</a></td></tr>
-<tr class="memdesc:a58d149b34275c0254f6ac8792519cac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPU variable - depth map data.  <a href="#a58d149b34275c0254f6ac8792519cac2">More...</a><br /></td></tr>
+<tr class="memdesc:a58d149b34275c0254f6ac8792519cac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPU variable - depth map data, values are from 0 to 255.  <a href="#a58d149b34275c0254f6ac8792519cac2">More...</a><br /></td></tr>
 <tr class="separator:a58d149b34275c0254f6ac8792519cac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0d8050437f8499af5a9796a090c72e7"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#ac0d8050437f8499af5a9796a090c72e7">depth_index_gpu_</a></td></tr>
 <tr class="memdesc:ac0d8050437f8499af5a9796a090c72e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPU variable - quantized depth map data.  <a href="#ac0d8050437f8499af5a9796a090c72e7">More...</a><br /></td></tr>
 <tr class="separator:ac0d8050437f8499af5a9796a090c72e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98026e79038b8e3727cfb7685500a29b"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a98026e79038b8e3727cfb7685500a29b">img_src_</a></td></tr>
-<tr class="memdesc:a98026e79038b8e3727cfb7685500a29b"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU variable - image source data.  <a href="#a98026e79038b8e3727cfb7685500a29b">More...</a><br /></td></tr>
+<tr class="memdesc:a98026e79038b8e3727cfb7685500a29b"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU variable - image source data, values are from 0 to 1.  <a href="#a98026e79038b8e3727cfb7685500a29b">More...</a><br /></td></tr>
 <tr class="separator:a98026e79038b8e3727cfb7685500a29b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af73e4fdcdd46e48928891b3412aa729a"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#af73e4fdcdd46e48928891b3412aa729a">dmap_src_</a></td></tr>
-<tr class="memdesc:af73e4fdcdd46e48928891b3412aa729a"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU variable - depth map data.  <a href="#af73e4fdcdd46e48928891b3412aa729a">More...</a><br /></td></tr>
+<tr class="memdesc:af73e4fdcdd46e48928891b3412aa729a"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU variable - depth map data, values are from 0 to 1.  <a href="#af73e4fdcdd46e48928891b3412aa729a">More...</a><br /></td></tr>
 <tr class="separator:af73e4fdcdd46e48928891b3412aa729a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1339ace425f9bdcc75944763a5aacc5d"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a1339ace425f9bdcc75944763a5aacc5d">depth_index_</a></td></tr>
 <tr class="memdesc:a1339ace425f9bdcc75944763a5aacc5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU variable - quantized depth map data.  <a href="#a1339ace425f9bdcc75944763a5aacc5d">More...</a><br /></td></tr>
 <tr class="separator:a1339ace425f9bdcc75944763a5aacc5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25463ec9fc91538a25b443d99e4ac7e4"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a25463ec9fc91538a25b443d99e4ac7e4">alpha_map_</a></td></tr>
-<tr class="memdesc:a25463ec9fc91538a25b443d99e4ac7e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU variable - calculated alpha map data.  <a href="#a25463ec9fc91538a25b443d99e4ac7e4">More...</a><br /></td></tr>
+<tr class="memdesc:a25463ec9fc91538a25b443d99e4ac7e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU variable - calculated alpha map data, values are 0 or 1.  <a href="#a25463ec9fc91538a25b443d99e4ac7e4">More...</a><br /></td></tr>
 <tr class="separator:a25463ec9fc91538a25b443d99e4ac7e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b2ac5c14e06245a860d16073ca18736"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a1b2ac5c14e06245a860d16073ca18736">dmap_</a></td></tr>
 <tr class="memdesc:a1b2ac5c14e06245a860d16073ca18736"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU variable - physical distances of depth map.  <a href="#a1b2ac5c14e06245a860d16073ca18736">More...</a><br /></td></tr>
@@ -329,6 +329,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a84c5312c849a883bf30c220a4b7fe0f6"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#a84c5312c849a883bf30c220a4b7fe0f6">sim_final_</a></td></tr>
 <tr class="memdesc:a84c5312c849a883bf30c220a4b7fe0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">reconstruction variable for testing  <a href="#a84c5312c849a883bf30c220a4b7fe0f6">More...</a><br /></td></tr>
 <tr class="separator:a84c5312c849a883bf30c220a4b7fe0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea01451e2a7a4530f4e2dcbaf74310e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_complex.html">Complex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hologram_generator.html#aea01451e2a7a4530f4e2dcbaf74310e0">hh_complex_</a></td></tr>
+<tr class="memdesc:aea01451e2a7a4530f4e2dcbaf74310e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">reconstruction variable for testing  <a href="#aea01451e2a7a4530f4e2dcbaf74310e0">More...</a><br /></td></tr>
+<tr class="separator:aea01451e2a7a4530f4e2dcbaf74310e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This is a main class for generating a digital hologram using depth map data. It is implemented on the CPU and GPU.</p><ol type="1">
@@ -338,7 +341,7 @@ Private Attributes</h2></td></tr>
 <li>For the testing purpose, reconstruct a image from the generated hologram. </li>
 </ol>
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00114">114</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00130">130</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2410a411435412a74a1fcc9cafa3a285"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2410a411435412a74a1fcc9cafa3a285">&#9670;&nbsp;</a></span>HologramGenerator()</h2>
@@ -375,7 +378,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8cpp_source.html#l00040">40</a> of file <a class="el" href="_hologram_generator_8cpp_source.html">HologramGenerator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8cpp_source.html#l00043">43</a> of file <a class="el" href="_hologram_generator_8cpp_source.html">HologramGenerator.cpp</a>.</p>
 
 </div>
 </div>
@@ -409,9 +412,9 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__gen__module.html#ga39c3d5b82e583886defa62787b180fa2" title="Angular spectrum propagation method for CPU implementation. ">Propagation_AngularSpectrum_CPU</a>, <a class="el" href="group__gen__module.html#gabef819735b281de41bf5899cf6eafa9a" title="Main method for generating a hologram on the CPU. ">Calc_Holo_CPU</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__gen__module.html#ga8e3ed25a67341b3996b29a8679018f61" title="Angular spectrum propagation method for CPU implementation. ">Propagation_AngularSpectrum_CPU</a>, <a class="el" href="group__gen__module.html#gabef819735b281de41bf5899cf6eafa9a" title="Main method for generating a hologram on the CPU. ">Calc_Holo_CPU</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html#l00353">353</a> of file <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html">HologramGenerator_CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html#l00351">351</a> of file <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html">HologramGenerator_CPU.cpp</a>.</p>
 
 </div>
 </div>
@@ -469,14 +472,14 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_hologram_generator.html#a35d3aa79a6f24504d0cca001e1af668d" title="Convert data from the spatial domain to the frequency domain using 2D FFT on CPU. ...">fftwShift</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_hologram_generator.html#a5186d7395820ad0c820dfa571c465986" title="Convert data from the spatial domain to the frequency domain using 2D FFT on CPU. ...">fftwShift</a> </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html#l00332">332</a> of file <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html">HologramGenerator_CPU.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a35d3aa79a6f24504d0cca001e1af668d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35d3aa79a6f24504d0cca001e1af668d">&#9670;&nbsp;</a></span>fftwShift()</h2>
+<a id="a5186d7395820ad0c820dfa571c465986"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5186d7395820ad0c820dfa571c465986">&#9670;&nbsp;</a></span>fftwShift()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -495,6 +498,18 @@ Private Attributes</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="class_complex.html">Complex</a> *&#160;</td>
           <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">fftw_complex *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">fftw_complex *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -536,6 +551,8 @@ Private Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">src</td><td>: input data variable </td></tr>
     <tr><td class="paramname">dst</td><td>: output data variable </td></tr>
+    <tr><td class="paramname">in</td><td>: input data pointer connected with FFTW plan </td></tr>
+    <tr><td class="paramname">out</td><td>: ouput data pointer connected with FFTW plan </td></tr>
     <tr><td class="paramname">nx</td><td>: the number of column of the input data </td></tr>
     <tr><td class="paramname">ny</td><td>: the number of row of the input data </td></tr>
     <tr><td class="paramname">type</td><td>: If type == 1, forward FFT, if type == -1, backward FFT. </td></tr>
@@ -543,9 +560,9 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__gen__module.html#ga39c3d5b82e583886defa62787b180fa2" title="Angular spectrum propagation method for CPU implementation. ">Propagation_AngularSpectrum_CPU</a>, <a class="el" href="group__encode__modulel.html#gaf3d146668e87affaf870b0842cdbe198" title="Encode the CGH according to a signal location parameter on the CPU. ">encoding_CPU</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__gen__module.html#ga8e3ed25a67341b3996b29a8679018f61" title="Angular spectrum propagation method for CPU implementation. ">Propagation_AngularSpectrum_CPU</a>, <a class="el" href="group__encode__modulel.html#gaf3d146668e87affaf870b0842cdbe198" title="Encode the CGH according to a signal location parameter on the CPU. ">encoding_CPU</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html#l00280">280</a> of file <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html">HologramGenerator_CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html#l00285">285</a> of file <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html">HologramGenerator_CPU.cpp</a>.</p>
 
 </div>
 </div>
@@ -579,7 +596,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8cpp_source.html#l00455">455</a> of file <a class="el" href="_hologram_generator_8cpp_source.html">HologramGenerator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8cpp_source.html#l00457">457</a> of file <a class="el" href="_hologram_generator_8cpp_source.html">HologramGenerator.cpp</a>.</p>
 
 </div>
 </div>
@@ -632,7 +649,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__encode__modulel.html#gaf3d146668e87affaf870b0842cdbe198" title="Encode the CGH according to a signal location parameter on the CPU. ">encoding_CPU</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html#l00369">369</a> of file <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html">HologramGenerator_CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html#l00367">367</a> of file <a class="el" href="_hologram_generator___c_p_u_8cpp_source.html">HologramGenerator_CPU.cpp</a>.</p>
 
 </div>
 </div>
@@ -662,7 +679,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8cpp_source.html#l00053">53</a> of file <a class="el" href="_hologram_generator_8cpp_source.html">HologramGenerator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8cpp_source.html#l00056">56</a> of file <a class="el" href="_hologram_generator_8cpp_source.html">HologramGenerator.cpp</a>.</p>
 
 </div>
 </div>
@@ -687,7 +704,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00218">218</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00234">234</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -711,7 +728,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00247">247</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00264">264</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -735,7 +752,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00217">217</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00233">233</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -759,7 +776,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00213">213</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00229">229</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -783,7 +800,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00232">232</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00249">249</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -807,7 +824,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00212">212</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00228">228</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -831,7 +848,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00222">222</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00239">239</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -855,7 +872,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00223">223</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00240">240</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -879,7 +896,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00219">219</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00236">236</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -903,7 +920,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00216">216</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00232">232</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -927,7 +944,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00221">221</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00238">238</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -951,7 +968,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00242">242</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00259">259</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -975,7 +992,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00260">260</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00277">277</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -999,7 +1016,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00258">258</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00275">275</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1023,7 +1040,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00259">259</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00276">276</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1047,7 +1064,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00257">257</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00274">274</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1071,7 +1088,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00246">246</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00263">263</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1095,7 +1112,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00235">235</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00252">252</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1119,7 +1136,31 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00261">261</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00278">278</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+
+</div>
+</div>
+<a id="aea01451e2a7a4530f4e2dcbaf74310e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea01451e2a7a4530f4e2dcbaf74310e0">&#9670;&nbsp;</a></span>hh_complex_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_complex.html">Complex</a>* HologramGenerator::hh_complex_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00284">284</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1143,7 +1184,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00231">231</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00248">248</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1167,7 +1208,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00215">215</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00231">231</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1191,7 +1232,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00211">211</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00227">227</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1215,7 +1256,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00209">209</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00225">225</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1239,7 +1280,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00248">248</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00265">265</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1263,7 +1304,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00238">238</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00255">255</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1287,7 +1328,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00237">237</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00254">254</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1311,7 +1352,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00228">228</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00245">245</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1335,7 +1376,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00255">255</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00272">272</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1359,7 +1400,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00241">241</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00258">258</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1383,7 +1424,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00249">249</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00266">266</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1407,7 +1448,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00233">233</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00250">250</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1431,7 +1472,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00234">234</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00251">251</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1455,7 +1496,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00266">266</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00283">283</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1479,7 +1520,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00263">263</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00280">280</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1503,7 +1544,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00265">265</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00282">282</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1527,7 +1568,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00264">264</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00281">281</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1551,7 +1592,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00262">262</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00279">279</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1575,7 +1616,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00253">253</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00270">270</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1599,7 +1640,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00256">256</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00273">273</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1623,7 +1664,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00230">230</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00247">247</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1647,7 +1688,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00236">236</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00253">253</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1671,7 +1712,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00254">254</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00271">271</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1695,7 +1736,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00240">240</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00257">257</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1719,7 +1760,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00226">226</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00243">243</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1743,7 +1784,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00225">225</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00242">242</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>
@@ -1767,7 +1808,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00244">244</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_hologram_generator_8h_source.html#l00261">261</a> of file <a class="el" href="_hologram_generator_8h_source.html">HologramGenerator.h</a>.</p>
 
 </div>
 </div>

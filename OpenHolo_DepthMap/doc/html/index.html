@@ -68,7 +68,7 @@ $(function() {
 <li class="level1"><a href="#swcom">Software Components</a></li>
 <li class="level1"><a href="#proc">Main Procedure</a></li>
 <li class="level1"><a href="#env">Environment</a></li>
-<li class="level1"><a href="#build">How to Build</a></li>
+<li class="level1"><a href="#build">How to Build Source Codes</a></li>
 </ul>
 </div>
 <div class="textblock"><h1><a class="anchor" id="intro"></a>
@@ -110,12 +110,13 @@ Environment</h1>
 <li>FFTW 3.3.5</li>
 </ul>
 <h1><a class="anchor" id="build"></a>
-How to Build</h1>
+How to Build Source Codes</h1>
 <p>Before building an execution file, you need to install MS Visual Studio 2015 C++ and Qt, also CUDA for the GPU execution.</p><ol type="1">
 <li>Download the source code from <a href="https://github.com/Openhologram/OpenHologram/tree/master/OpenHolo_DepthMap">here</a>.</li>
 <li>Go to the directory '<a class="el" href="class_hologram_depthmap.html" title="Test class for executing the sample program, which shows how to use a hologram library. ">HologramDepthmap</a>'.</li>
 <li>Open the Visual Studio soulution file, 'HologramDepthmap.sln'.</li>
 <li>Check the configuation of the Qt &amp; CUDA to work with the Visual Studio.</li>
+<li>For Qt, you may need to set QTDIR environment variable -&gt; System Properties-&gt;Advanced-&gt;Environment Variable.</li>
 <li>To use FFTW, copy 'libfftw3-3.dll' into the 'bin' directory and copy 'libfftw3-3.lib' into the 'lib' directory.</li>
 <li>Visual Studio Build Menu -&gt; Configuration Menu, set "Release" for the Active solution configuration, "x64" for the Active solution platform.</li>
 <li>Set '<a class="el" href="class_hologram_depthmap.html" title="Test class for executing the sample program, which shows how to use a hologram library. ">HologramDepthmap</a>' as a StartUp Project.</li>
