@@ -144,6 +144,9 @@ imagesc(handles.axes2,abs(trans_H)), colormap gray;                      % thres
 set(handles.input_state,'Value',1);
 set(handles.trans_state,'Value',1);
 
+set(handles.zoom_input,'Value',0);
+set(handles.zoom_trans,'Value',0);
+
 function resoly_Callback(hObject, eventdata, handles)
 % hObject    handle to resoly (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -381,6 +384,8 @@ elseif strcmp(temp1,'Imaginary')
     imagesc(handles.axes1,imag(H)), colormap gray;  
 end
 
+
+set(handles.zoom_input,'Value',0);
 % --- Executes during object creation, after setting all properties.
 function input_state_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to input_state (see GCBO)
@@ -477,6 +482,7 @@ elseif strcmp(temp1,'Imaginary')
     trans_H=rec_holo(trans_H,z,l_x,l_y,wl);
     imagesc(handles.axes2,imag(trans_H)), colormap gray;
 end
+set(handles.zoom_trans,'Value',0);
 
 % --- Executes during object creation, after setting all properties.
 function trans_state_CreateFcn(hObject, eventdata, handles)
@@ -760,7 +766,7 @@ range = [1,x,0,1];
 
 [~,~,color]=size(H);
 for i=1:color
-    figure(i),plot(1:x,abs(H(x/2+1,1:y,i)),'r',1:x,abs(trans_H(x/2+1,1:y,i)),'b'), axis(range);
+    figure(i),plot(1:x,abs(H(x/2+1,1:y,i)),'r',1:x,abs(trans_H(x/2+1,1:y,i)),'b'), axis(range), legend('original','transformed');
 end
 
 

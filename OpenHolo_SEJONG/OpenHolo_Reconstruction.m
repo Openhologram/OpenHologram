@@ -130,7 +130,7 @@ elseif get(handles.rbtnaxis,'Value')
     Z=-((Z-120)/10)/140+0.1;
 end
 
-imagesc(handles.axes2,abs(H)), colormap gray; 
+imagesc(handles.axes2,abs(H)), colormap gray;
 set(handles.extracted_depth,'String',num2str(Z));
 set(handles.reconstruction_state,'Value',1);
 
