@@ -1,54 +1,62 @@
-function [ phase_H_image ] = Hologram_WRP( obj, Hologram_resolution, SLM_pitch )
-%generate hologram by wavefront recording plane
-%obj is point cloud based data(x,y,z), ASC, txt etc. 
-%kinect depth and color information modeling
+%Main program of hologram generation by wavefront recording plane method
+%by Openholo library project
+%2017-10-30 update
+%
+clc;clear;close all;
+%% Input the object and prameter
 
-%%input 
-obj=load('Demo Head - Point Cloud.ASC');
-
-%% computer generated hologram-WRP
-%%%% WRP
-
-lambda = 532e-9;
-k = 2*pi/lambda;
-
-obj_center=(max(obj)+min(obj))./2;
-obj(:,1)= (obj(:,1)-obj_center(1))/15000;
-obj(:,2)= (obj(:,2)-obj_center(2))/15000;
-obj(:,3) = (obj(:,3)-obj_center(3))/40000;
+load obj;
+lambda = 532e-9;                                % Wave length
+k = 2*pi/lambda;       
+Hologram_resolution=1025;                       % Hologram resolution     
+Hologram_sampling_interval = 3.9e-6;            % Hologram sampling interval
 
 
-size_all = 4e-3;  %hologram_size
+%% setting WRP
+z_wrp = 0.5e-3;  %  WRP location
+z=z_wrp-obj(:,3);
+
+N=round(abs(lambda.*z./(Hologram_sampling_interval^2)/2)+0.5).*2-1;        %sampling size of N
+Nx = round(obj(:,1)./Hologram_sampling_interval)+(Hologram_resolution-1)/2;  
+Ny = round(obj(:,2)./Hologram_sampling_interval)+(Hologram_resolution-1)/2;
 
 size_obj = length(obj(:,1));
-
 Hologram_wrp = zeros(Hologram_resolution);
-Hologram_sampling_interval = size_all/Hologram_resolution;
-
-z_wrp = 0.5e-3;  %object to wrp
-
-z=z_wrp-obj(:,3);
-N=round(abs(lambda.*z./(Hologram_sampling_interval^2)/2)+0.5).*2-1;  %obj_subhologram_N
-Nx = round(X./Hologram_sampling_interval)+(Hologram_resolution-1)/2;
-Ny = round(Y./Hologram_sampling_interval)+(Hologram_resolution-1)/2;
 
 for o = 1: size_obj
-
+    
+    fprintf('%d\n',o);  
     [y_run, x_run]= meshgrid((-(N(o)-1)/2:(N(o)-1)/2)*Hologram_sampling_interval,(-(N(o)-1)/2:(N(o)-1)/2)*Hologram_sampling_interval);
     r = sign(z(o))*sqrt(z(o)^2 + y_run.^2 + x_run.^2);
-    Sub_hologram = exp(1j*rand*2*pi)*exp(1j*k*r)./r;     
-    temp=zeros(Hologram_resolution+25, Hologram_resolution+25);    
+    Sub_hologram = exp(1j*rand*2*pi)*exp(1j*k*r)./r;   
+    
+    temp=zeros(Hologram_resolution+N(o), Hologram_resolution+N(o));    
     temp(Nx(o):Nx(o)+N(o)-1,Ny(o):Ny(o)+N(o)-1)= Sub_hologram;
     Hologram_wrp=Hologram_wrp+temp((N(o)+1)/2:Hologram_resolution+(N(o)-1)/2,(N(o)+1)/2:Hologram_resolution+(N(o)-1)/2);  
-
+%     figure,imshow(Hologram_wrp)
+ 
 end
 
-WRPHologram = WRP_FresnelPropagation(Hologram_wrp, dx, dy, d, lambda);
+%% Fresnel Propagation
+
+ROWS= Hologram_resolution;                                     
+COLS= Hologram_resolution;
+v=Hologram_sampling_interval.*(ones(COLS,1)*(-ROWS/2:ROWS/2-1))';
+h=Hologram_sampling_interval.*(ones(ROWS,1)*(-COLS/2:COLS/2-1));
+d=0.05;
+WRPHologram = FresnelPropagation(Hologram_wrp, Hologram_sampling_interval, Hologram_sampling_interval, d, lambda);
+
+%% reconstruction
+
+for o=0:1:20  % reconstructed  
+    d2 = d+0.002 - o*0.0002;
+    original = FresnelPropogation(k,v, h,-d2,WRPHologram);
+    figure; imshow(abs(original),[]);
+end
 
 phaseadd =WRPHologram;
 phase_H = angle(phaseadd) + pi;
 phase_H_image = uint8(255*phase_H/max(max(phase_H)));
-imwrite(phase_H_image, 'Orth_wrp.bmp', 'bmp');
+imwrite(phase_H_image, 'wrp_hologram.bmp', 'bmp');
 
-end
 
