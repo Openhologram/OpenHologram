@@ -1,0 +1,13 @@
+
+-----------------------------
+CWO++ library ver 0.31
+release date : 20 Feb. 2017
+Bug fix:
+improved computational accuracy of diffraction calculations and auxiliary functions
+mopified all diffraction calculations on GPU.Fixed diffraction calculation on GPU. Calculation sizes other than 2^n can also be calculated.
+fixed bugs of random phase functions on GPU
+GPU functions were fixed: copy constructor, Average, Variance, DoubleStepFresnel
+added SSIM function
+added CountNonZero(), ThresholdToZero(float th), ThresholdAbsToZero(float th), ThresholdAbsToZero(float th)
+etc....
+
