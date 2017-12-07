@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include="ophgen_pointcloud_gpu.cpp">
+      <Filter>소스 파일</Filter>
+    </CudaCompile>
+    <CudaCompile Include="ophgen_pointcloud_gpu.h">
+      <Filter>헤더 파일</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{66a53453-8c2a-4849-8e27-2e0731ea7a31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{b8967e7f-48da-4cdb-9737-9c5fcc857701}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
