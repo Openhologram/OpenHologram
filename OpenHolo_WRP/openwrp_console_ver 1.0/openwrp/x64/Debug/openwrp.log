@@ -1,0 +1,50 @@
+﻿빌드 시작: 2017-12-04 오전 10:15:16
+     1>2 노드의 "D:\Yanling\OpenHolo_dep\새 폴더\openwrp_console\openwrp\openwrp.vcxproj" 프로젝트(Build 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"D:\Yanling\OpenHolo_dep\새 폴더\openwrp_console\openwrp\cwo\src" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include" /Zi /nologo /W3 /WX- /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /openmp /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt WRP.cpp openwrp.cpp
+         openwrp.cpp
+     1>d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(778): warning C4190: 'cwoInterNearest'에 C 링크를 지정했으나 C와 호환되지 않는 UDT 'cwoComplex'을(를) 반환합니다.
+                 d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(287) : 'cwoComplex' 선언을 참조하십시오.
+     1>d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(788): warning C4190: 'cwoInterLinear'에 C 링크를 지정했으나 C와 호환되지 않는 UDT 'cwoComplex'을(를) 반환합니다.
+                 d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(287) : 'cwoComplex' 선언을 참조하십시오.
+     1>d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(798): warning C4190: 'cwoInterCubic'에 C 링크를 지정했으나 C와 호환되지 않는 UDT 'cwoComplex'을(를) 반환합니다.
+                 d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(287) : 'cwoComplex' 선언을 참조하십시오.
+     1>d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(808): warning C4190: 'cwoInterLanczos'에 C 링크를 지정했으나 C와 호환되지 않는 UDT 'cwoComplex'을(를) 반환합니다.
+                 d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(287) : 'cwoComplex' 선언을 참조하십시오.
+     1>openwrp.cpp(16): warning C4305: '인수' : 'double'에서 'float'(으)로 잘립니다.
+     1>openwrp.cpp(17): warning C4305: '인수' : 'double'에서 'float'(으)로 잘립니다.
+     1>openwrp.cpp(19): warning C4305: '인수' : 'double'에서 'float'(으)로 잘립니다.
+         WRP.cpp
+     1>d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(778): warning C4190: 'cwoInterNearest'에 C 링크를 지정했으나 C와 호환되지 않는 UDT 'cwoComplex'을(를) 반환합니다.
+                 d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(287) : 'cwoComplex' 선언을 참조하십시오.
+     1>d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(788): warning C4190: 'cwoInterLinear'에 C 링크를 지정했으나 C와 호환되지 않는 UDT 'cwoComplex'을(를) 반환합니다.
+                 d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(287) : 'cwoComplex' 선언을 참조하십시오.
+     1>d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(798): warning C4190: 'cwoInterCubic'에 C 링크를 지정했으나 C와 호환되지 않는 UDT 'cwoComplex'을(를) 반환합니다.
+                 d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(287) : 'cwoComplex' 선언을 참조하십시오.
+     1>d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(808): warning C4190: 'cwoInterLanczos'에 C 링크를 지정했으나 C와 호환되지 않는 UDT 'cwoComplex'을(를) 반환합니다.
+                 d:\yanling\openholo_dep\새 폴더\openwrp_console\cwo\src\cwo_lib.h(287) : 'cwoComplex' 선언을 참조하십시오.
+     1>WRP.cpp(28): warning C4244: '인수' : 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(33): warning C4267: '초기화 중' : 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(45): warning C4244: '=' : 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(46): warning C4244: '=' : 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(47): warning C4244: '=' : 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(61): warning C4244: '인수' : 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(81): warning C4267: '초기화 중' : 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(82): warning C4267: '초기화 중' : 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(111): warning C4244: '초기화 중' : 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(132): warning C4244: '인수' : 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(132): warning C4244: '=' : 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(133): warning C4244: '인수' : 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+     1>WRP.cpp(133): warning C4244: '=' : 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+         코드를 생성하고 있습니다...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Yanling\OpenHolo_dep\새 폴더\openwrp_console\x64\Debug\openwrp.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Yanling\OpenHolo_dep\새 폴더\openwrp_console\openwrp\cwo\dll" cwo.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Yanling\OpenHolo_dep\새 폴더\openwrp_console\x64\Debug\openwrp.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Yanling\OpenHolo_dep\새 폴더\openwrp_console\x64\Debug\openwrp.lib" /MACHINE:X64 x64\Debug\cwo.obj
+         x64\Debug\openwrp.obj
+         x64\Debug\stdafx.obj
+         x64\Debug\WRP.obj
+         openwrp.vcxproj -> D:\Yanling\OpenHolo_dep\새 폴더\openwrp_console\x64\Debug\openwrp.exe
+     1>"D:\Yanling\OpenHolo_dep\새 폴더\openwrp_console\openwrp\openwrp.vcxproj" 프로젝트를 빌드했습니다(Build 대상).
+
+빌드했습니다.
+
+경과 시간: 00:00:02.80

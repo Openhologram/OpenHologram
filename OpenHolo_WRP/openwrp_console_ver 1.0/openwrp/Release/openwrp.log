@@ -1,0 +1,39 @@
+﻿빌드 시작: 2017-10-12 오전 2:11:06
+     1>2 노드의 "D:\my_code\openwrp\openwrp\openwrp.vcxproj" 프로젝트(Build 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Release\openwrp.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\openwrp.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp" openwrp.cpp
+         cwo.cpp
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(4): warning C4627: '#include <stdlib.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(5): warning C4627: '#include <math.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(6): warning C4627: '#include <string.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(7): warning C4627: '#include <ctype.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(10): warning C4627: '#include <iostream>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(11): warning C4627: '#include <vector>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(12): warning C4627: '#include <string>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(15): warning C4627: '#include <windows.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(19): warning C4627: '#include <omp.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(22): warning C4627: '#include <limits.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(23): warning C4627: '#include <float.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(26): warning C4627: '#include "cwo.h"': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+                 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>..\..\..\Yanling\cwo0.31-x64\src\cwo.cpp(7538): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+         openwrp.cpp
+     1>openwrp.cpp(10): fatal error C1083: 포함 파일을 열 수 없습니다. 'cwo.h': No such file or directory
+     1>"D:\my_code\openwrp\openwrp\openwrp.vcxproj" 프로젝트를 빌드했습니다(Build 대상). - 실패
+
+빌드하지 못했습니다.
+
+경과 시간: 00:00:00.76
